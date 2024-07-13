@@ -1,0 +1,25 @@
+src: methods.NAE.NAE
+params:
+  default:
+    EPOCH: 40
+    BATCH_SIZE: 1024
+    learning_rate: 0.001
+    num_repeat: 1
+    lr1: !!float 1e-5
+    lr2: !!float 1e-5
+    lambda1: !!float 1e-5
+    weight_decay: !!float 1e-5
+    pretrain_lr: 0.001
+    pretrain_EPOCH: 4000
+
+  Samson:
+    EPOCH: 300
+    num_repeat: 1
+    BATCH_SIZE: 1024
+    learning_rate: 0.001
+    lr1: !!float 1e-5
+    lr2: !!float 1e-5
+    lambda1: !!float 0.05
+    weight_decay: !!float 1e-5
+    pretrain_lr: 0.001
+    pretrain_EPOCH: 4000

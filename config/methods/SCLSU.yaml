@@ -1,0 +1,6 @@
+src: methods.SCLSU.SCLSU
+params:
+  default:
+    maxiter_ADMM: 200  # 1000
+    rho: 1000
+    tol_phi: !!float 1e-5

@@ -1,0 +1,11 @@
+src: methods.ELMM.ELMM
+params:
+  default:
+    lambda_S: 0.5
+    maxiter: 200
+    rho: 1
+    maxiter_ADMM: 100
+    tol_A_ADMM: !!float 1e-3
+    tol_A: !!float 1e-3
+    tol_S: !!float 1e-3
+    tol_psi: !!float 1e-3

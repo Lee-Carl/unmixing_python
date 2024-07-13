@@ -1,0 +1,16 @@
+src: methods.FCLSU.FCLSU
+params:
+  default:
+    maxiter_ADMM: 1000
+    rho: 1
+    tol_phi: !!float 1e-5
+
+  Samson:
+    maxiter_ADMM: 1000
+    rho: !!float 5e-4
+    tol_phi: !!float 1e-5
+
+  DeepGUn_ex4:
+    maxiter_ADMM: 1000
+    rho: !!float 5e-4
+    tol_phi: !!float 1e-5

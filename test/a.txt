@@ -1,0 +1,87 @@
+[1]	杨广奇, 刘慧, 钟锡武, 等. 遥感图像时空融合综述[J]. 计算机工程与应用, 2022, 58 (10): 27-40.
+[2]	杨哲海, 韩建峰, 宫大鹏，等. 高光谱遥感技术的发展与应用[J]. 海洋测绘, 2003, (6): 55-58.
+[3]	Keshava N, Mustard J F. Spectral Unmixing[J]. IEEE Signal Processing Magazine, 2002, 19(1): 44-57.
+[4]	Qi L, Chen Z, Gao F, et al. Multiview Spatial-Spectral Two-Stream Network for Hyperspectral Image Unmixing[J]. IEEE Transactions on Geoscience and Remote Sensing, 2023, 61: 1-16.
+[5]	Wang M, Zhao M, Chen J, et al. Nonlinear Unmixing of Hyperspectral Data via Deep Autoencoder Networks[J]. IEEE Geoscience and Remote Sensing Letters, 2019, 16(9): 1467-1471.
+[6]	Shi S, Zhao M, Zhang L, et al. Variational Autoencoders for Hyperspectral Unmixing with Endmember Variability[C]//2021 IEEE International Conference on Acoustics, Speech and Signal Processing. 2021: 1875-1879.
+[7]	苏远超, 许若晴, 高连如，等. 基于深度学习的高光谱遥感图像混合像元分解研究综述[J]. 遥感学报, 2024, 28(01): 1-19.
+[8]	Wang X, Kong Y, Gao Y, et al. Dimensionality Reduction for Hyperspectral Data Based on Pairwise Constraint Discriminative Analysis and Nonnegative Sparse Divergence[J]. IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing, 2017, 10(4): 1552-1562.
+[9]	Dian R, Li S, Fang L. Learning a Low Tensor-Train Rank Representation for Hyperspectral Image Super-Resolution[J]. IEEE Transactions on Neural Networks and Learning Systems, 2019, 30(9): 2672-2683.
+[10]	Hong D, Yokoya N, Chanussot J, et al. CoSpace: Common Subspace Learning from Hyperspectral-Multispectral Correspondences[J]. IEEE Transactions on Geoscience and Remote Sensing, 2019, 57(7): 4349-4359.
+[11]	Hong D, Gao L, Yokoya N, et al. More Diverse Means Better: Multimodal Deep Learning Meets Remote-Sensing Imagery Classification[J]. IEEE Transactions on Geoscience and Remote Sensing, 2021, 59(5): 4340-4354.
+[12]	Yang S, Feng Z, Wang M, et al. Self-Paced Learning-Based Probability Subspace Projection for Hyperspectral Image Classification[J]. IEEE Transactions on Neural Networks and Learning Systems, 2019, 30(2): 630-635.
+[13]	Peng J, Li L, Tang Y Y. Maximum Likelihood Estimation-Based Joint Sparse Representation for the Classification of Hyperspectral Remote Sensing Images[J]. IEEE Transactions on Neural Networks and Learning Systems, 2019, 30(6): 1790-1802.
+[14]	Hang R, Liu Q, Hong D, et al. Cascaded Recurrent Neural Networks for Hyperspectral Image Classification[J]. IEEE Transactions on Geoscience and Remote Sensing, 2019, 57(8): 5384-5394.
+[15]	Li Y, Jiang T, Xie W, et al. Sparse Coding-Inspired GAN for Hyperspectral Anomaly Detection in Weakly Supervised Learning[J]. IEEE Transactions on Geoscience and Remote Sensing, 2022, 60: 1-11.
+[16]	保昊, 张晓, 张楠楠，等. 基于高光谱遥感技术的农作物病虫害应用研究现状[J]. 农业与技术, 2023, 43(13): 1-4.
+[17]	张兴源. 遥感技术在农业生产中的应用[J]. 农业科技与信息, 2023, (8): 35-38.
+[18]	Lanthier Y, Bannari A, Haboudane D, et al. Hyperspectral Data Segmentation and Classification in Precision Agriculture: A Multi-Scale Analysis[C]//2008 IEEE International Geoscience and Remote Sensing Symposium: Vol. 2. 2008: II-585-II-588.
+[19]	张艺伟, 郭焱培, 唐荣，等. 高光谱遥感在植物多样性研究中的应用进展与趋势[J]. 遥感学报, 2023, 27(11): 2467-2483.
+[20]	孙步阳, 吕献林, 张俊鹏. 基于高光谱遥感的湖泊水质富营养化状态评价[J]. 湖北农业科学, 2022, 61(10) :152-155.
+[21]	郭秋, 刘贺春. 基于HJ-1高光谱的曹家坝矿山水环境识别与监测[J]. 山东农业大学学报（自然科学版）, 2020, 51(3): 447-451.
+[22]	王惠敏, 于磊, 徐凯磊，等. 基于高分五号高光谱影像的干旱区盐渍化土壤盐分含量估算[J]. 光谱学与光谱分析, 2023, 43(7): 2278-2286.
+[23]	张建国, 鲁佳, 蔡厚安，等. 高光谱遥感技术在大冶地区水环境监测中的应用[J]. 矿产勘查, 2023, 14(3): 471-479.
+[24]	杨敏, 蔡宗明, 聂兴信，等.遥感技术在矿区生态环境中的应用与发展[J]. 陕西煤炭, 2024, 43(3): 92-95.
+[25]	Roberts D A, Gardner M, Church R, et al. Mapping Chaparral in the Santa Monica Mountains Using Multiple Endmember Spectral Mixture Models[J]. Remote Sensing of Environment, 1998, 65(3): 267-279.
+[26]	Chen H M, Chen H H, Chen Y M, et al. Non-Invasive Assessment of Psoriasis from Snapshot Hyperspectral Imaging[C]//2018 IEEE International Conference on Systems, Man, and Cybernetics. 2018: 1300-1304.
+[27]	Fei B, Akbari H, Halig L V. Hyperspectral Imaging and Spectral-Spatial Classification for Cancer Detection[C]//2012 5th International Conference on BioMedical Engineering and Informatics. 2012: 62-64.
+[28]	智通祥, 杨斌, 王斌. 一种考虑光谱变异性的高光谱图像非线性解混算法[J]. 红外与毫米波学报,  2019, 38(1): 115-124+132.
+[29]	罗文斐, 罗寿枚, 张兵, 等. 遥感图像端元光谱变异性的模糊描述[J]. 中国图象图形学报,  2009, 14(4): 567-571.
+[30]	Borsoi R A, Imbiriba T, Bermudez J C M, et al. Spectral Variability in Hyperspectral Data Unmixing: A Comprehensive Review[J]. IEEE Geoscience and Remote Sensing Magazine, 2021, 9(4): 223-270.
+[31]	Bioucas-Dias J M, Plaza A, Dobigeon N, et al. Hyperspectral Unmixing Overview: Geometrical, Statistical, and Sparse Regression-Based Approaches[J]. IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing, 2012, 5(2): 354-379.
+[32]	Raksuntorn N, Du Q. Nonlinear Spectral Mixture Analysis for Hyperspectral Imagery in An Unknown Environment[J]. IEEE Geoscience and Remote Sensing Letters, 2010, 7(4): 836-840.
+[33]	Lefeuvre J, Moussaoui S, Grosset L, et al. A Decision Fusion for Source Fetection Based on Multimodal Supervised Spectral Unmixing[C]//2021 IEEE Statistical Signal Processing Workshop. 2021: 416-420.
+[34]	Han Z, Hong D, Gao L, et al. Multimodal Hyperspectral Unmixing via Attention Networks[C]// 2022 IEEE International Geoscience and Remote Sensing Symposium. 2022: 1784-1787.
+[35]	Rasti B, Koirala B, Scheunders P. HapkeCNN: Blind Nonlinear Unmixing for Intimate Mixtures Using Hapke Model and Convolutional Neural Network[J]. IEEE Transactions on Geoscience and Remote Sensing, 2022, 60: 1-15.
+[36]	Tang J, Bao W, Lei B, et al. Spatial-Spectral Weighted Sparse Multi-Layer Nonnegative Matrix Factorization for Hyperspectral Image Unmixing[C]//2023 13th Workshop on Hyperspectral Imaging and Signal Processing: Evolution in Remote Sensing. 2023: 1-5.
+[37]	Boardman J W , Kruse F A , Green R O .Mapping Target Signatures via Partial Unmixing of AVIRIS Data[C]//Summaries of the Fifth Annual JPL Airborne Earth Science Workshop. Volume 1: AVIRIS Workshop.1995.
+[38]	Winter ME. N-FINDR: An Algorithm for Fast Autonomous Spectral Endmember Determination in Hyperspectral Data[J].Proceedings of SPIE - The International Society for Optical Engineering, 1999, 3753:266-275.
+[39]	Chang CI, Wu CC, Liu W, and Ouyang YC. A New Growing Method for Simplex-Based Endmember Extraction Algorithm[J]. IEEE Transactions on Geoscience and Remote Sensing, 2006, 44(10): 2804-2819.
+[40]	Nascimento J M P, Dias J M B. Vertex Component Analysis: A Fast Algorithm to Unmix Hyperspectral Data[J]. IEEE Transactions on Geoscience and Remote Sensing, 2005, 43(4): 898-910.
+[41]	Li H C. Geometric N-finder Algorithm for Finding Endmembers in Hyperspectral Imagery[C]//2017 IEEE International Geoscience and Remote Sensing Symposium. 2017: 652-655.
+[42]	Li H C. An Algorithm For Fast Spectral Endmember Determination in Hyperspectral Data[C]// 2018 IEEE International Geoscience and Remote Sensing Symposium. 2018: 2689-2692.
+[43]	Chan T, Chi C, Huang Y, and Ma W. A Convex Analysis-Based MinimumVolume Enclosing Simplex Algorithm for Hyperspectral Unmixing[J]. IEEE Transactions on Signal Processing, 2009, 57(11): 4418-4432.
+[44]	Li J, Agathos A, Zaharie D, Bioucas-Dias JM, Plaza A, and Li X. Minimum Volume Simplex Analysis: A Fast Algorithm for Linear Hyperspectral Unmixing[J]. IEEE Transactions on Geoscience and Remote Sensing, 2015, 53(9): 5067–5082.
+[45]	Lee DD , Seung HS. Learning The Parts of Objects By Non-Negative Matrix Factorization[J]. Nature, 1999, 401(6755): 788–791.
+[46]	Miao L and Qi H. Endmember Extraction From Highly Mixed Data Using Minimum Volume Constrained Nonnegative Matrix Factorization[J]. IEEE Transactions on Geoscience and Remote Sensing, 2007, 45(3): 765–777.
+[47]	Qian Y, Jia S, Zhou J, and Robles-Kelly A. Hyperspectral Unmixing via L1/2 Sparsity-Constrained Nonnegative Matrix Factorization[J]. IEEE Transactions on Geoscience and Remote Sensing, 2011, 49(11): 4282–4297.
+[48]	Tong L, Zhou J, Qian Y, et al. Multiple Graph Regularized NMF for Hyperspectral Unmixing[C]//2015 7th Workshop on Hyperspectral Image and Signal Processing: Evolution in Remote Sensing (WHISPERS), 2015: 1-4.
+[49]	Zhang S, Deng C, Li J, et al. Superpixel-Guided Sparse Unmixing for Remotely Sensed Hyperspectral Imagery[C]// 2019 IEEE International Geoscience and Remote Sensing Symposium. 2019: 2155-2158.
+[50]	Shen X, Liu H, Zhang X, et al. Superpixel-guided Local Sparsity Prior for Hyperspectral Sparse Regression Unmixing[J]. IEEE Geoscience and Remote Sensing Letters, 2022, 19: 1-5.
+[51]	Iordache MD, Bioucas-Dias J, and Plaza A. Collaborative Sparse Regression for Hyperspectral Unmixing[J]. IEEE Transactions on Geoscience and Remote Sensing, 2014, 52(1): 341–354.
+[52]	Iordache MD, Bioucas-Dias J, Plaza A, and Somers B. MUSIC-CSR: Hyperspectral Unmixing via Multiple Signal Classification and Collaborative Sparse Regression[J]. IEEE Transactions on Geoscience and Remote Sensing, 2014, 52(7): 4364–4382.
+[53]	Iordache MD, Bioucas-Dias J, and Plaza A. Total Variation Spatial Regularization for Sparse Hyperspectral Unmixing[J]. IEEE Transactions on Geoscience and Remote Sensing, 2012, 50(11): 4484–4502.
+[54]	Feng R, Zhong Y, and Zhang L. Adaptive Non-Local Euclidean Medians Sparse Unmixing for Hyperspectral Imagery[J]. ISPRS Journal of Photogrammetry and Remote Sensing, 2014, 97: 9–24.
+[55]	Feng R, Zhong Y, and Zhang L. Adaptive Spatial Regularization Sparse Unmixing Strategy Based on Joint MAP for Hyperspectral Remote Sensing Imagery[J]. IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing, 2016, 9(12): 5791–5805.
+[56]	Feng R, Zhong Y, and Zhang L. An Improved Nonlocal Sparse Unmixing Algorithm for Hyperspectral Imagery[J]. IEEE Geoscience and Remote Sensing Letters, 2015, 12(4): 915–919.
+[57]	Zhang S, Li J, Li H C, et al. Spectral-Spatial Weighted Sparse Regression for Hyperspectral Image Unmixing[J]. IEEE Transactions on Geoscience and Remote Sensing, 2018, 56(6): 3265-3276.
+[58]	Shi S, Zhang L, Altmann Y, et al. Deep Generative Model for Spatial-Spectral Unmixing with Multiple Endmember Priors[J]. IEEE Transactions on Geoscience and Remote Sensing, 2022, 60: 1-14.
+[59]	Zhao M, Wang M, Chen J, et al. Hyperspectral Unmixing for Additive Nonlinear Models With a 3-D-CNN Autoencoder Network[J]. IEEE Transactions on Geoscience and Remote Sensing, 2022, 60: 1-15.
+[60]	Lyngdoh R B, Dave R, Anand S S, et al. Hyperspectral Unmixing with Spectral Variability Using Endmember Guided Probabilistic Generative Deep Learning[C]//2022 IEEE International Geoscience and Remote Sensing Symposium. 2022: 1768-1771.
+[61]	Li H, Borsoi R A, Imbiriba T, et al. Model-Based Deep Autoencoder Networks for Nonlinear Hyperspectral Unmixing[J]. IEEE Geoscience and Remote Sensing Letters, 2022, 19: 1-5.
+[62]	Hong D, Chanussot J, Yokoya N, et al. WU-Net: A Weakly-Supervised Unmixing Network for Remotely Sensed Hyperspectral Imagery[C]//2019 IEEE International Geoscience and Remote Sensing Symposium. 2019: 373-376.
+[63]	Shi S, Zhao M, Zhang L, et al. Probabilistic Generative Model for Hyperspectral Unmixing Cccounting for Endmember Variability[J]. IEEE Transactions on Geoscience and Remote Sensing, 2022, 60: 1-15.
+[64]	Hong D, Gao L, Yao J, et al. Endmember-guided Unmixing Network (EGU-Net): A General Deep Learning Framework for Self-supervised Hyperspectral Unmixing[J]. IEEE Transactions on Neural Networks and Learning Systems, 2022, 33(11): 6518-6531.
+[65]	Han Z, Hong D, Gao L, et al. Multimodal Hyperspectral Unmixing: Insights From Attention Networks[J]. IEEE Transactions on Geoscience and Remote Sensing, 2022, 60: 1-13.
+[66]	Hong D, Wu X, Ghamisi P, et al. Invariant Attribute Profiles: A Spatial-Frequency Joint Feature Extractor for Hyperspectral Image Classification[J]. IEEE Transactions on Geoscience and Remote Sensing, 2020, 58(6): 3791-3808.
+[67]	Su Y, Li J, Plaza A, et al. DAEN: Deep Autoencoder Networks for Hyperspectral Unmixing[J]. IEEE Transactions on Geoscience and Remote Sensing, 2019, 57(7): 4309-4321.
+[68]	Borsoi R A, Imbiriba T, Bermudez J C M. Deep Generative Endmember Modeling: An Application to Unsupervised Spectral Unmixing[J]. IEEE Transactions on Computational Imaging, 2020, 6: 374-384.
+[69]	Qi L, Gao F, Dong J, et al. SSCU-Net: Spatial-Spectral Collaborative Unmixing Network for Hyperspectral Images[J]. IEEE Transactions on Geoscience and Remote Sensing, 2022, 60: 1-15.
+[70]	Jin Q, Ma Y, Mei X, et al. TANet: An Unsupervised Two-Stream Autoencoder Network for Hyperspectral Unmixing[J]. IEEE Transactions on Geoscience and Remote Sensing, 2022, 60: 1-15.
+[71]	Zhou J J. Research on The Complexity Characteristics of Convolutional Neural Networks[C]//2023 IEEE 7th Information Technology and Mechatronics Engineering Conference: Vol. 7. 2023: 402-405.
+[72]	Mansouri N, Lachiri Z. Laughter synthesis: A Comparison between Variational Autoencoder and Autoencoder[C]//2020 5th International Conference on Advanced Technologies for Signal and Image Processing. 2020: 1-6.
+[73]	Shah N, Ganatra A. Comparative Study of Autoencoders-its Types and Application[C]//2022 6th International Conference on Electronics, Communication and Aerospace Technology. 2022: 175-180.
+[74]	Rasti B, Koirala B. SUnCNN: Sparse Unmixing Using Unsupervised Convolutional Neural Network[J]. IEEE Geoscience and Remote Sensing Letters, 2022, 19: 1-5.
+[75]	Xu Q, Wu Z, Yang Y, et al. The Difference Learning of Hidden Layer between Autoencoder and Variational Autoencoder[C]//2017 29th Chinese Control and Decision Conference. 2017: 4801-4804.
+[76]	He K, Zhang X, Ren S, et al. Deep Residual Learning for Image Recognition[C]//2016 IEEE Conference on Computer Vision and Pattern Recognition. 2016: 770-778.
+[77]	Leontev M, Mikheev A, Sviatov K, et al. Quality Metrics of Variational Autoencoders[C]//2020 International Conference on Information Technology and Nanotechnology. 2020: 1-5.
+[78]	Drumetz L, Veganzones M A, Henrot S, et al. Blind Hyperspectral Unmixing Using an Extended Linear Mixing Model to Address Spectral Variability[J]. IEEE Transactions on Image Processing, 2016, 25(8): 3890-3905.
+[79]	Imbiriba T, Borsoi R A, Moreira Bermudez J C. Generalized Linear Mixing Model Accounting for Endmember Variability[C]//2018 IEEE International Conference on Acoustics, Speech and Signal Processing. 2018: 1862-1866.
+[80]	Thouvenin P A, Dobigeon N, Tourneret J Y. Hyperspectral Unmixing with Spectral Variability Using A Perturbed Linear Mixing Model[J]. IEEE Transactions on Signal Processing, 2016, 64(2): 525-538.
+[81]	Bioucas-Dias J M, Figueiredo M A T. Alternating Direction Algorithms for Constrained Sparse Regression: Application to Hyperspectral Unmixing[C]//2010 2nd Workshop on Hyperspectral Image and Signal Processing: Evolution in Remote Sensing. 2010: 1-4.
+[82]	Palsson B, Ulfarsson M O, Sveinsson J R. Convolutional Autoencoder for Spectral-Spatial Hyperspectral Unmixing[J]. IEEE Transactions on Geoscience and Remote Sensing, 2021, 59(1): 535-549.
+[83]	Gao L, Han Z, Hong D, et al. CyCU-Net: Cycle-Consistency Unmixing Network by Learning Cascaded Autoencoders[J]. IEEE Transactions on Geoscience and Remote Sensing, 2022, 60: 1-14.
+[84]	Heylen R, Burazerovic D, Scheunders P. Fully Constrained Least Squares Spectral Unmixing by Simplex Projection[J]. IEEE Transactions on Geoscience and Remote Sensing, 2011, 49(11): 4112-4122.
+[85]	Ozkan S, Kaya B, Akar G B. EndNet: Sparse AutoEncoder Network for Endmember Extraction and Hyperspectral Unmixing[J]. IEEE Transactions on Geoscience and Remote Sensing, 2019, 57(1): 482-496.
+[86]	Hong D, Yokoya N, Chanussot J, et al. An Augmented Linear Mixing Model to Address Spectral Variability for Hyperspectral Unmixing[J]. IEEE Transactions on Image Processing, 2019, 28(4): 1923-1938.
+[87]	Palsson B, Sigurdsson J, Sveinsson J R, et al. Hyperspectral Unmixing Using A Neural Network Autoencoder[J]. IEEE Access, 2018, 6: 25646-25656.

@@ -1,0 +1,71 @@
+####################################################
+# dataset:
+# hyper7
+# Samson
+# JasperRidge
+# DeepGUn_ex2
+# DeepGUn_ex4
+# SUnCNN_DC1
+# SUnCNN_DC2
+# Urban4
+# Urban5
+# Urban6
+####################################################
+# initE:
+
+# GT
+# VCA
+# SiVM
+####################################################
+# initA:
+
+#  GT
+#  FCLSU
+#  SCLSU
+#  SUnSAL
+####################################################
+# methods
+
+#  FCLSU
+#  SCLSU
+#  ELMM
+#  PGMSU
+#  Model5
+#  CNNAEU
+#  UnDIP
+#  SUnCNN
+#  CyCU
+#  EGU
+####################################################
+
+dataset: JasperRidge1 # Urban5
+method: PGMSU
+mode: run  # run / params
+seed: 0
+
+init:
+  custom_init_data: ~ # 1st
+  custom_init_method: ~ # 2nd
+  # 3rd
+  snr: 0
+  normalization: True # True / False, ~
+  E: VCA # GT / VCA
+  A: SUnSAL # GT / SUnSAL / FCLSU
+  D: ~
+  show_initdata: ~ # True
+
+output:
+  sort: True # a smart but not completely accurate way for endmembers and abundances
+  draw: default # ~ / default / SUnCNN / CyCU
+  metrics: default  # ~ / default / SUnCNN / CyCU
+
+params:
+  obj: 'lambda_kl'
+  around: around1 # choose the one among around1,around2 and around3
+
+  around1: "[0, 1e-7, 5e-7, 1e-6, 5e-6, 1e-5, 5e-5, 1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 5e-2, 0.1, 0.5, 1]"
+  around2: "[1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1]"
+  around3: "[1e-10, 5e-10, 1e-9, 5e-9, 1e-8, 5e-8,1e-7,5e-7, 1e-6]"
+  around4: "[5e-4,1e-3]"
+  around5: "[i * 1.0 /1e5 for i in range(1, 10 + 1, 1)]"
+  around6: "[i for i in range(1, 21 + 1, 2)]"

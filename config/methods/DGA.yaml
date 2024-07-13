@@ -1,0 +1,51 @@
+src: methods.DGA.DGA
+params:
+  default:
+    lr: !!float 1e-3
+    epochs: 200
+    z_dim: 4
+    seed: 0
+    lambda_kl: !!float 1e-5
+    lambda_sad: 1
+    lambda_vol: 1
+    lambda_sp: 0.1
+
+  JasperRidge:
+    lr: !!float 1e-3
+    epochs: 200
+    z_dim: 4
+    seed: 0
+    lambda_kl: !!float 1e-5
+    lambda_sad: 1
+    lambda_vol: 1
+    lambda_sp: 0.1
+
+  DeepGUn_ex2:
+    lr: !!float 1e-3
+    epochs: 200
+    z_dim: 4
+    seed: 0
+    lambda_kl: 0.5
+    lambda_sad: 0
+    lambda_vol: 1.0
+    lambda_sp: 0.001
+
+  DeepGUn_ex4:
+    lr: !!float 1e-3
+    epochs: 200
+    z_dim: 4
+    seed: 0
+    lambda_kl: 0.01
+    lambda_sad: 0.5
+    lambda_vol: 1
+    lambda_sp: 0.01
+
+  Urban4:
+    lr: !!float 1e-3
+    epochs: 200
+    z_dim: 4
+    seed: 0
+    lambda_kl: 0.001
+    lambda_sad: 4
+    lambda_vol: 6
+    lambda_sp: 0

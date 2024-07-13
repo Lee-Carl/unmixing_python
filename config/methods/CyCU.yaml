@@ -1,0 +1,41 @@
+src: methods.CyCU.CyCU
+params:
+  default:
+    LR: !!float 2e-3
+    batch_size: 1
+    EPOCH: 480
+    beta: 0.5
+    delta: !!float 1e-3
+    gamma: !!float 1e-7
+    sparse_decay: !!float 5e-6
+    weight_decay_param: !!float 1e-4
+
+  Samson:
+    LR: !!float 2e-3
+    batch_size:  1
+    EPOCH: 480
+    beta: 0.5
+    delta: !!float 1e-2 # 1e-3
+    gamma: !!float 1e-7
+    sparse_decay: !!float 5e-6
+    weight_decay_param: !!float 1e-4
+
+  JasperRidge:
+    LR: !!float 8e-3
+    batch_size:  1
+    EPOCH: 480
+    beta: 0.5
+    delta: !!float 1e-2
+    gamma: !!float 1e-7
+    sparse_decay: 0
+    weight_decay_param: 0
+
+  DeepGUn_ex4:
+    LR: !!float 1e-3
+    batch_size: 1
+    EPOCH: 480
+    beta: 0.5
+    delta: !!float 1e-2
+    gamma: !!float 1e-7
+    sparse_decay: 0
+    weight_decay_param: 0

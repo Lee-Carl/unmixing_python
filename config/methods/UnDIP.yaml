@@ -1,0 +1,32 @@
+src: methods.UnDIP.UnDIP
+params:
+  default:
+    lr: 0.001
+    lambda2: !!float 1e-7
+    lambda1: !!float 1e-1
+    niters: 300
+    exp_weight: 0.99
+
+  Samson:
+    lr: 0.001
+    lr1: 0.01
+    lr2: 0.01
+    lr3: 0.01
+    lr4: 0.01
+    lr5: 0.01
+    lambda2: !!float 5e-8
+    lambda1: !!float 0.5
+    niters: 300
+    exp_weight: 0.55
+
+  DeepGUn_ex4:
+    lr: !!float 1e-4
+    lr1: 0.01
+    lr2: 0.01
+    lr3: 0.01
+    lr4: 0.01
+    lr5: 0.01
+    lambda2: !!float 5e-8
+    lambda1: !!float 0.5
+    niters: 300
+    exp_weight: 0.55

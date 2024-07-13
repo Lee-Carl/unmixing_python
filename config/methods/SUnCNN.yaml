@@ -1,0 +1,21 @@
+src: methods.SUnCNN.SUnCNN
+params:
+  default:
+    niters: 4000  # 4000
+    lr: 0.001
+    exp_weight: 0.99
+
+  SUnCNN_DC1:
+    niters: 400
+    lr: 0.001
+    exp_weight: 0.99
+
+  SUnCNN_DC2:
+    niters: 400
+    lr: 0.001
+    exp_weight: 0.99
+
+  Samson:
+    niters: 4000
+    lr: 0.001
+    exp_weight: 0.99

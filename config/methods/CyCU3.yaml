@@ -1,0 +1,117 @@
+src: methods.CyCU3.CyCU3
+params:
+  default:
+    EPOCH: 300
+    LR: 0.0016
+    batch_size: 1
+    beta: 0.5
+    gamma: 0.9
+    delta: 0.01
+    lr1: !!float 5e-8
+    lr2: !!float 1e-7
+    lr3: !!float 1
+    lr4: !!float 1
+    lr5: !!float 1e-7
+    lr_en: !!float 5.5e-3
+    lr_de1: !!float 4e-4
+    step_size: 80
+    turns: 1
+    wd: 0.0001
+    wd1: !!float 2e-4
+    kernel: 7
+
+  Samson:
+    EPOCH: 300
+    LR: 0.0016
+    batch_size: 1
+    beta: 0.5
+    gamma: 0.9
+    delta: 0.01
+    lr1: !!float 5e-8
+    lr2: !!float 1e-7
+    lr3: !!float 0
+    lr4: !!float 1
+    lr5: !!float 1
+    lr_en: !!float 5.5e-3
+    lr_de1: !!float 4e-4
+    step_size: 80
+    turns: 1
+    wd: 0.0001
+    wd1: !!float 2e-4
+    kernel: 7
+
+  DeepGUn_ex4:
+    EPOCH: 300
+    LR: 0.0016
+    batch_size: 1
+    beta: 0.5
+    gamma: 0.5
+    lr1: !!float 5e-8
+    lr2: !!float 5e-7
+    lr3: !!float 0
+    lr4: !!float 1
+    lr5: !!float 1
+    lr_en: !!float 5.5e-3
+    lr_de1: !!float 4.71e-8
+    step_size: 83
+    turns: 1
+    wd: 0.0001
+    kernel: 5
+
+  DeepGUn_ex1:
+    EPOCH: 300
+    LR: 0.0016
+    batch_size: 1
+    beta: 0.5
+    gamma: 0.9
+    delta: 0.01
+    lr1: !!float 5e-8
+    lr2: !!float 1e-7
+    lr3: !!float 1
+    lr4: !!float 1
+    lr_en: !!float 5.5e-3
+    lr_de1: !!float 4e-4
+    step_size: 80
+    turns: 1
+    wd: 0.0001
+    wd1: !!float 2e-4
+    kernel: 7
+
+  hyper7:
+    EPOCH: 300
+    LR: 0.0016
+    batch_size: 1
+    beta: 0.5
+    gamma: 0.9
+    delta: 0.01
+    lr1: !!float 1e-7
+    lr2: !!float 1e-7
+    lr3: !!float 1
+    lr4: !!float 1
+    lr5: !!float 1e-7
+    lr_en: !!float 5.5e-3
+    lr_de1: !!float 4e-4
+    step_size: 80
+    turns: 1
+    wd: 0.0001
+    kernel: 3
+
+  mgf:
+    EPOCH: 300
+    LR: 0.0016
+    batch_size: 1
+    beta: 0.5
+    gamma: 0.9
+    delta: 0.01
+    lr1: !!float 5e-8
+    lr2: !!float 1e-7
+    lr3: !!float 1
+    lr4: !!float 1
+    lr5: !!float 1e-7
+    lr_en: !!float 5.5e-3
+    lr_de1: !!float 4e-4
+    step_size: 80
+    turns: 1
+    wd: 0.0001
+    wd1: !!float 2e-4
+    kernel: 7

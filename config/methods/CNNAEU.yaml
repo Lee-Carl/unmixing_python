@@ -1,0 +1,25 @@
+src: methods.CNNAEU.CNNAEU
+params:
+  default:
+    epochs: 320
+    lr: 0.0003
+    batch_size: 15
+    patch_size: 40
+    num_patches: 250
+    lambda1: !!float 1e-2
+
+  JasperRidge:
+    epochs: 3
+    lr: 0.0003
+    batch_size: 15
+    patch_size: 40
+    num_patches: 250
+    lambda1: !!float 1e-2
+
+  Samson:
+    epochs: 50
+    lr: 0.0003
+    batch_size: 15
+    patch_size: 40
+    num_patches: 250
+    lambda1: !!float 1e-2
