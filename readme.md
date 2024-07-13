@@ -1,1 +1,1 @@
-这是一个基于深度学习的高光谱盲解混的project。
+这是一个基于深度学习的高光谱盲解混的project。在config/main_config.yaml下配置信息，然后点击main.py运行即可。
