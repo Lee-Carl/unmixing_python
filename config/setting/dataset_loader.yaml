@@ -4,8 +4,8 @@ DeepGUn_ex3: core.load.simu.DeepGUn_ex3.loader
 DeepGUn_ex4: core.load.simu.DeepGUn_ex4.loader
 JasperRidge: core.load.real.JasperRidge.loader
 Samson: core.load.real.Samson.loader
-SUnCNN_DC1: core.load.simu.SUnCNN_DC1
-SUnCNN_DC2: core.load.simu.SUnCNN_DC2
+SUnCNN_DC1: core.load.simu.SUnCNN_DC1.loader
+SUnCNN_DC2: core.load.simu.SUnCNN_DC2.loader
 Urban4: core.load.real.Urban4.loader
 Urban5: core.load.real.Urban5.loader
 Urban6: core.load.real.Urban6.loader

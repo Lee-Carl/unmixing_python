@@ -38,7 +38,7 @@
 #  EGU
 ####################################################
 
-dataset: JasperRidge1 # Urban5
+dataset: JasperRidge # Urban5
 method: PGMSU
 mode: run  # run / params
 seed: 0
