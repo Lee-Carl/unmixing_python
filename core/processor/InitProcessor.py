@@ -2,9 +2,9 @@ from ..load import loadhsi as loadds
 from ..init import InitEdm, InitAbu, Norm, Noise, set_pytorch_seed
 from .DataProcessor import DataProcessor
 import scipy.io as sio
+import numpy as np
 import os
 import torch
-import numpy as np
 import random
 
 
@@ -82,7 +82,7 @@ class InitProcessor:
 
         # 为端元和丰度排序
         dp = DataProcessor(data)
-        init = dp.sort_EndmembersAndAbundances(data, init, repeat=True, case=2, tip=False)
+        init = dp.sort_EndmembersAndAbundances(data, init, repeat=True, case=1, tip=False)
 
         if savepath:
             print(savepath)
