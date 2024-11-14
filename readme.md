@@ -1,5 +1,5 @@
 - [中文](readme.md)
-- [English](./_docs/readme.en.md)
+- [English](readme.en.md)
 
 # 解混
 
