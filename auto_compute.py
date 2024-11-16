@@ -1,5 +1,5 @@
 import os
-from core.mode import Auto
+from mode import Auto
 
 if __name__ == '__main__':
     """

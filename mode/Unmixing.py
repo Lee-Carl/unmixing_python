@@ -1,14 +1,15 @@
-from .processor import CoreProcessor
-from .mode import ParamsMode, RunMode
+from core import ModeAdapter
+from .run import RunMode
+from .params import ParamsMode
 
 
 class Unmixing:
-    def __init__(self):
+    def __init__(self, data=None):
         self.r = RunMode()
         self.p = ParamsMode()
 
     def __call__(self):
-        cp = CoreProcessor()
+        cp = ModeAdapter()
         if cp.cfg.mode == "run":
             self.r.run()
         elif cp.cfg.mode == "params":

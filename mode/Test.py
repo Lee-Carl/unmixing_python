@@ -1,6 +1,7 @@
 import os
-from .mode import RunMode, ParamsMode
-from core.processor import InitProcessor, DataProcessor, CoreProcessor
+from .run import RunMode
+from .params import ParamsMode
+from core import DataProcessor, ModeAdapter
 import scipy.io as sio
 
 # 获取父目录的父目录的绝对地址,即Study2的绝对地址
@@ -11,7 +12,6 @@ anchor = anchor.replace('\\', '/')
 MAIN_DIR = anchor
 
 # 定义类
-ip = InitProcessor()
 rm = RunMode()
 pm = ParamsMode()
 
@@ -52,7 +52,7 @@ class TestMode:
 
     @staticmethod
     def test_initdata(replace=False):
-        cp = CoreProcessor()
+        cp = ModeAdapter()
         cp.set_seed()
         dataset = cp.get_Dataset()
         init = cp.get_InitData(dataset, replace=replace)

@@ -1,6 +1,6 @@
 from core.init import Norm
 from core.SmartMetrics import SmartMetrics
-from core.processor import Sort
+from core.func import hsiSort
 from core.load import loadhsi
 import scipy.io as sio
 import numpy as np
@@ -37,10 +37,8 @@ class AutoMetrics:
             E_true = data_true["E"]
         Y_true = data_true["Y"]
 
-        s = Sort()
-
-        E_pred, _ = s.sort_edm(E_true, E_pred, P)
-        A_pred, _ = s.sort_abu(A_true, A_pred, P)
+        E_pred, _ = hsiSort.sort_edm(E_true, E_pred, P)
+        A_pred, _ = hsiSort.sort_abu(A_true, A_pred, P)
 
         # 计算结果
         aRMSE = am.compute_RMSE_2(A_true, A_pred)
@@ -85,10 +83,8 @@ class AutoMetrics:
             E_true = data_true["E"]
         Y_true = data_true["Y"]
 
-        s = Sort()
-
-        E_pred, _ = s.sort_edm(E_true, E_pred, P,repeat=True)
-        A_pred, _ = s.sort_abu(A_true, A_pred, P)
+        E_pred, _ = hsiSort.sort_edm(E_true, E_pred, P, repeat=True)
+        A_pred, _ = hsiSort.sort_abu(A_true, A_pred, P)
 
         # 计算结果
         aRMSE = am.compute_RMSE_2(A_true, A_pred)
@@ -100,7 +96,6 @@ class AutoMetrics:
         SAD_Y = am.compute_SAD(Y_true, Y_pred, type="Y")[0]
 
         aRMSE2 = am.compute_RMSE(A_true, A_pred)
-
 
         # 显示
         content = f"aSAD = {aSAD} | SAD = {SAD}\n" \

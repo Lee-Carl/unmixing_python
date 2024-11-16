@@ -1,4 +1,4 @@
-from core.processor import CoreProcessor
+from core import ModeAdapter
 from .draw import Draw
 from .metrics import Metrics
 import os
@@ -7,7 +7,7 @@ from datetime import datetime
 import time
 from tqdm import tqdm
 
-cp = CoreProcessor()
+cp = ModeAdapter()
 
 
 class RunMode:
@@ -51,7 +51,8 @@ class RunMode:
         cp.set_seed()
         data_pred = cp.run(model, params, initData, savepath=outdir, output_display=True)
         data_pred = cp.sort_EndmembersAndAbundances(dataset, data_pred)
-        sio.savemat(outdir + "results.mat", data_pred)
+        # sort_EndmembersAndAbundances(dtrue=dataset, dpred=datapred, edm_repeat=True, case=2)
+        sio.savemat(outdir + "results.mat", data_pred.__dict__)
         ed = time.time()
         end_time = self.__get_current_date_and_time()
         total_time = self.__get_runtime(st, ed)

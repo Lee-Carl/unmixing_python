@@ -1,4 +1,4 @@
-from core.processor import CoreProcessor, DataProcessor
+from core import ModeAdapter, DataProcessor
 from .draw import Draw
 from .metrics import Metrics
 import os
@@ -6,8 +6,10 @@ import scipy.io as sio
 from datetime import datetime
 import time
 from tqdm import tqdm
+from utils import HsiUtil
 
-cp = CoreProcessor()
+cp = ModeAdapter()
+dp = DataProcessor()
 
 
 class ParamsMode:
@@ -50,14 +52,14 @@ class ParamsMode:
         print('*' * 60 + '  Start traing!  ' + '*' * 60)
         time.sleep(0.1)
         progress = tqdm(around, desc='Params Loop')
-        dp = DataProcessor(dataset)
+
         start_time = datetime.now()  # 获取开始时间
         for i, e in enumerate(progress):
             params[obj] = e
             cp.set_seed()
 
             datapred = cp.run(model, params, initData, savepath=outdir, output_display=False)
-            datapred = dp.checkShape(datapred)
+            datapred = HsiUtil.checkHsiDatasetDims(datapred)
             datapred = cp.sort_EndmembersAndAbundances(dataset, datapred)
 
             mt = self.metrics(dataset, datapred)
