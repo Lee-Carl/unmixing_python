@@ -6,7 +6,7 @@ import os
 from tqdm import tqdm
 from .model import Model
 from .restraint import SparseKLloss, SumToOneLoss, NonZeroClipper
-from utils.extract import extract_edm
+from core.extract import extract_edm
 
 
 # Define Dataset

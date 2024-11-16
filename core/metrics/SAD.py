@@ -1,7 +1,10 @@
 import numpy as np
+from core.wraps import checkShape
+from custom_types import HsiData
 
 
-def SAD(data_true, data_pred):
+@checkShape
+def SAD(data_true: HsiData, data_pred: HsiData):
     """
     端元的shape要求：(L,P)-(波段数，端元数) OR (L,P,N)-(波段数，端元数,像元数)
     像元的shape要求：(L,N)-(波段数，像元数->像元维度之积)
@@ -26,3 +29,22 @@ def SAD(data_true, data_pred):
     c = np.sqrt(np.sum(data_pred ** 2, 0))
     sad = np.arccos(a / (b * c))
     return sad.mean(), sad
+
+@checkShape
+def SAD_2(data_true: HsiData, data_pred: HsiData):
+    """
+    :param data_true: (L,P)
+    :param data_pred: (N,L,P)
+    :return:
+    """
+    asad = 0
+    if np.max(data_true) > 1:
+        data_true = data_true / np.max(data_true)
+    for e in data_pred:
+        if np.max(e) > 1:
+            x = e / np.max(e)
+        else:
+            x = e
+        asad += SAD(data_true=data_true, data_pred=x)[1]
+    asad /= data_pred.shape[0]
+    return asad.mean(), asad

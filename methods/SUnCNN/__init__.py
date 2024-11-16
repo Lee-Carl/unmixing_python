@@ -7,8 +7,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from .model2 import Model
-import restraint
-from utils import extract_edm
+import core.restraint as restraint
+from core.extract import extract_edm
 from ..Base import Base
 
 

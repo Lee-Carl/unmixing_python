@@ -13,7 +13,7 @@ from sklearn.feature_extraction.image import extract_patches_2d
 from .model import Model
 from ..Base import Base
 import scipy.io as sio
-import restraint as rs
+import core.restraint as rs
 
 
 class CNNAEU(Base):

@@ -8,8 +8,8 @@ from tqdm import tqdm
 from .model2 import Model
 from ..Base import Base
 import copy
-from utils import extract_edm
-import restraint as rs
+from core.extract import extract_edm
+import core.restraint as rs
 
 
 class UnDIP(Base):

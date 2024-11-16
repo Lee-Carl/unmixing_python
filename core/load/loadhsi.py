@@ -1,6 +1,7 @@
 import importlib
 import os
 from .Anchor import DATA_LOADER_CONFIG
+from custom_types import HsiDataset
 import yaml
 
 
@@ -28,7 +29,7 @@ def __importlib_module(module_name):
         print(f"An exception occurred: {b}")
 
 
-def loadhsi(case: str):
+def loadhsi(case: str) -> HsiDataset:
     # 读取data_loader.yaml中的数据
     with open(DATA_LOADER_CONFIG, 'r', encoding='utf-8') as file:
         config_data = yaml.safe_load(file)
@@ -36,8 +37,7 @@ def loadhsi(case: str):
     if case in config_data.keys():
         # 如果存在相应的数据集, 那么导入
         d = __importlib_module(config_data[case])
-        return d()
+        return HsiDataset(**d())
     else:
         # 不存在相应的数据集, 就报错
         raise "There is no such case in the dataset_loader.yaml"
-

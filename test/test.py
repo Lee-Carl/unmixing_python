@@ -1,4 +1,4 @@
-from core import TestMode
+from mode import TestMode
 
 ts = TestMode()
 
