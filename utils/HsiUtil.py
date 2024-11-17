@@ -21,11 +21,14 @@ class HsiUtil:
         return data
 
     @staticmethod
-    def getShapeForData(field: HsiPropertyEnum, data: HsiDataset) -> Tuple[int, int]:
+    def getShapeForData(field: HsiPropertyEnum, data: HsiDataset) -> Tuple:
         """ 得到指定的字段的维度 """
-        L, P, N = data.getPLN()
+        P, L, N = data.getPLN()
         if field == HsiPropertyEnum.E:
-            return L, P if len(data.E) == 2 else (L, P, N)
+            if len(data.E.shape) == 2:
+                return L, P
+            else:
+                return L, P, N
         elif field == HsiPropertyEnum.A:
             return P, N
         elif field == HsiPropertyEnum.Y:
@@ -35,8 +38,11 @@ class HsiUtil:
     @staticmethod
     def changeDims(data: HsiData, shape: tuple) -> HsiData:
         if data.shape != shape:
-            dims = tuple(data.shape.index(e) for e in shape)  # 获取目标shape在data的shape中的次序
-            data = data.transpose(dims)  # 转置成目标shape
+            if len(data.shape) == 2:
+                data = data.T
+            else:
+                dims = tuple(data.shape.index(e) for e in shape)  # 获取目标shape在data的shape中的次序
+                data = data.transpose(dims)  # 转置成目标shape
         return data
 
     @staticmethod

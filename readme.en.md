@@ -9,7 +9,7 @@ This is a program for deep learning based hyperspectral unmixing, mainly to do b
 
 ## 2.Usage
 - Install the python library via requirements.txt, or install it yourself (recommended version is at least py37+pytorch 1.0.0);
-- Just write the configuration information under `config/main_config.yaml` and click `main.py` to run it.
+- Write configuration information in main.py, then click Run to start.
 
 ## 3.Nice github repositories
 - Hyperspectral-Imaging ([comprehensive knowledge repository](https://github.com/xianchaoxiu/Hyperspectral-Imaging))

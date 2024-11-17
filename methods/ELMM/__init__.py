@@ -1,5 +1,5 @@
 import numpy as np
-from ..Base import Base
+from custom_types import MethodBase
 
 
 def proj_simplex(data):
@@ -28,10 +28,12 @@ def proj_simplex(data):
     return projected
 
 
-class ELMM(Base):
+class ELMM(MethodBase):
 
-    def __init__(self, params, init) -> None:
-        super(ELMM, self).__init__(params=params, init=init)
+    def __init__(self, params, init):
+        super().__init__(params, init)
+        self.params = params
+        self.init = init
 
     def SCLSU(self, data, S0):
         # 初始化参数

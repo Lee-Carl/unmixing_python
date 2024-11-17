@@ -1,4 +1,4 @@
-from core import ModeAdapter, DataProcessor
+from core import ModeAdapter, DataProcessor,MyLog
 from .draw import Draw
 from .metrics import Metrics
 import os
@@ -7,15 +7,17 @@ from datetime import datetime
 import time
 from tqdm import tqdm
 from utils import HsiUtil
+from custom_types import MainCfg
 
-cp = ModeAdapter()
 dp = DataProcessor()
 
 
 class ParamsMode:
-    def __init__(self):
+    def __init__(self, cfg: MainCfg):
         self.metrics = Metrics
         self.draw = Draw
+        self.cp = ModeAdapter(cfg)
+        self.log = MyLog(cfg)
 
     @staticmethod
     def __get_current_date_and_time():
@@ -32,13 +34,13 @@ class ParamsMode:
     def run(self):
         st = time.time()
         start_time = self.__get_current_date_and_time()
-        cp.set_seed()
-        dataset = cp.get_Dataset()
-        initData = cp.get_InitData(dataset)
-        outdir = cp.get_outdir()
-        model = cp.get_Model()
-        params = cp.get_params()
-        obj, around = cp.get_Params_adjust()
+        self.cp.set_seed()
+        dataset = self.cp.get_Dataset()
+        initData = self.cp.get_InitData(dataset)
+        outdir = self.log.get_outdir()
+        model = self.cp.get_Model()
+        params = self.cp.get_params()
+        obj, around = self.cp.get_Params_adjust()
 
         if obj not in params.keys():
             raise ValueError(
@@ -48,7 +50,7 @@ class ParamsMode:
         ar, es, yr, ys = [], [], [], []
         iter = []
         lams = []
-        cp.record(outdir)
+        self.log.record(outdir)
         print('*' * 60 + '  Start traing!  ' + '*' * 60)
         time.sleep(0.1)
         progress = tqdm(around, desc='Params Loop')
@@ -56,11 +58,11 @@ class ParamsMode:
         start_time = datetime.now()  # 获取开始时间
         for i, e in enumerate(progress):
             params[obj] = e
-            cp.set_seed()
+            self.cp.set_seed()
 
-            datapred = cp.run(model, params, initData, savepath=outdir, output_display=False)
+            datapred = self.cp.run(model, params, initData, savepath=outdir, output_display=False)
             datapred = HsiUtil.checkHsiDatasetDims(datapred)
-            datapred = cp.sort_EndmembersAndAbundances(dataset, datapred)
+            datapred = self.cp.sort_EndmembersAndAbundances(dataset, datapred)
 
             mt = self.metrics(dataset, datapred)
             d = mt()
@@ -98,9 +100,9 @@ class ParamsMode:
         print(f'起始时间: {start_time}')
         print(f'终止时间: {end_time}')
         print(f'共计时间: {total_time}')
-        cp.record_inyaml(outpath=outdir, content=f'start_time: {start_time}')
-        cp.record_inyaml(outpath=outdir, content=f'end_time: {end_time}')
-        cp.record_inyaml(outpath=outdir, content=f'total_time: {total_time}')
+        self.log.record_inyaml(outpath=outdir, content=f'start_time: {start_time}')
+        self.log.record_inyaml(outpath=outdir, content=f'end_time: {end_time}')
+        self.log.record_inyaml(outpath=outdir, content=f'total_time: {total_time}')
         print('*' * 60 + '  Analysis!  ' + '*' * 60)
         self.analysis_params(outdir)
 

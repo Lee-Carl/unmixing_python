@@ -17,12 +17,14 @@ def loader():
     return {
         "Y": Y,
         "E": M,
-        "E_3d": Mvs,
         "A": A,
         "P": P,
         "L": L,
         "N": N,
         "name": "DeepGUn_ex1",
         "H": H,
-        "W": W
+        "W": W,
+        "other": {
+            "E_3d": Mvs,
+        }
     }

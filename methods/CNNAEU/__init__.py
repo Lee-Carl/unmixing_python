@@ -11,14 +11,15 @@ import torch
 import torch.nn.functional as F
 from sklearn.feature_extraction.image import extract_patches_2d
 from .model import Model
-from ..Base import Base
+from custom_types import MethodBase
 import scipy.io as sio
 import core.restraint as rs
 
 
-class CNNAEU(Base):
+class CNNAEU(MethodBase):
+
     def __init__(self, params, init):
-        super(CNNAEU, self).__init__(params=params, init=init)
+        super().__init__(params, init)
         self.device = torch.device(
             "cuda:0" if torch.cuda.is_available() else "cpu",
         )

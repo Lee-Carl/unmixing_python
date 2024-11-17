@@ -1,13 +1,15 @@
 import numpy as np
 from tqdm import tqdm
-from ..Base import Base
+from custom_types import MethodBase
 import copy
 
 
-class SCLSU(Base):
+class SCLSU(MethodBase):
 
-    def __init__(self, params, init) -> None:
-        super(SCLSU, self).__init__(params, init)
+    def __init__(self, params, init):
+        super().__init__(params, init)
+        self.params = params
+        self.init = init
 
     def run(self, savepath=None, tqdm_leave=True, *args, **kwargs):
         # 初始化参数

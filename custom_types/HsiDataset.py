@@ -1,12 +1,12 @@
 from typing import Union, Dict, Any, Union
 import numpy as np
-from typing import Tuple
+import copy
 
 HsiData = Union[np.float32, float, np.ndarray]
 
 
 class HsiDataset(object):
-    def __init__(self, **data: Dict[str, Dict[str, any]]):
+    def __init__(self, **data: Dict[str, Dict[str, Any]]):
         assert isinstance(data["Y"], HsiData.__args__), f"数据集中像元类型有误为{type(data['Y'])}"
         assert isinstance(data["E"], HsiData.__args__), f"数据集中端元类型有误为{type(data['E'])}"
         assert isinstance(data["A"], HsiData.__args__), f"数据集中丰度类型有误为{type(data['A'])}"
@@ -27,6 +27,7 @@ class HsiDataset(object):
         self.H: int = data.get("H", 0)
         self.W: int = data.get("W", 0)
         self.name: Union[str, None] = data.get("name", None)
+        self.other: dict = data.get("other", None)
 
     def getPLN(self):
         return self.P, self.L, self.N
@@ -79,3 +80,12 @@ class HsiDataset(object):
     @property
     def imgHeight(self):
         return self.H
+
+    def __getitem__(self, key):
+        return self.__dict__[key]
+
+    def __setitem__(self, key, value):
+        self.__dict__[key] = value
+
+    def copy(self):
+        return copy.deepcopy(self)

@@ -1,6 +1,3 @@
-from mode import TestMode
-
-ts = TestMode()
 
 if __name__ == '__main__':
     relpath = "res/CyCU3/DeepGUn_ex4/37/"

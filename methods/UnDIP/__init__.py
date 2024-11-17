@@ -6,15 +6,17 @@ import torch
 import torch.nn.functional as F
 from tqdm import tqdm
 from .model2 import Model
-from ..Base import Base
+from custom_types import MethodBase
 import copy
-from core.extract import extract_edm
+from core.func.extract import extract_edm
 import core.restraint as rs
 
 
-class UnDIP(Base):
+class UnDIP(MethodBase):
     def __init__(self, params, init):
-        super(UnDIP, self).__init__(params, init)
+        super().__init__(params, init)
+        self.params = params
+        self.init = init
 
     def run(self, savepath=None, output_display=True, *args, **kwargs):
         params = self.params

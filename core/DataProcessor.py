@@ -1,32 +1,41 @@
-from custom_types import HsiDataset, HsiData, InitE_Enum, InitA_Enum
+from custom_types import HsiDataset, HsiData, InitE_Enum, InitA_Enum, DatasetsEnum
 from .init import InitEdm, InitAbu, Norm, Noise, set_pytorch_seed
 from .func import hsiSort
+from .load import loadhsi, loadInitData
 import numpy as np
 
 
 class DataProcessor:
     @staticmethod
+    def loadDatast(case: DatasetsEnum) -> HsiDataset:
+        return loadhsi(case.name)
+
+    @staticmethod
     def set_seed(seed: int = 0):
         set_pytorch_seed(seed)
 
-    @staticmethod
-    def gen_initData(data: HsiDataset, initE: InitE_Enum, initA: InitA_Enum, initD: int = None,
+    @classmethod
+    def gen_initData(cls, data: HsiDataset, initE: InitE_Enum, initA: InitA_Enum, initD: int = None,
                      snr: float = 0, normalization: bool = True, seed: int = 0) -> HsiDataset:
         Y_init: HsiData = data.pixels.copy()
-        Y_init = DataProcessor.addNoise(Y_init, snr)
-        Y_init = DataProcessor.norm(Y_init, normalization)
-        E_init = DataProcessor.gen_endmembers(Y_init=Y_init, dataset=data, initE=initE, seed=seed)
-        A_init = DataProcessor.gen_abundances(Y_init=Y_init, E_init=E_init, dataset=data, initA=initA, seed=seed)
+        Y_init = cls.addNoise(Y_init, snr)
+        Y_init = cls.norm(Y_init, normalization)
+        E_init = cls.gen_endmembers(Y_init=Y_init, dataset=data, initE=initE, seed=seed)
+        A_init = cls.gen_abundances(Y_init=Y_init, E_init=E_init, dataset=data, initA=initA, seed=seed)
         init_dic = {
             'Y': Y_init,
             'E': E_init,
             'A': A_init,
+            'D': np.zeros(0),
             'P': data.P,
             'L': data.L,
             'N': data.N,
             'H': data.H,
             'W': data.W,
-            'name': f'{data.name}_{str(snr)}db_{initE}_{initA}',
+            'name': f'{str(snr)}db_{initE.name}_{initA.name}',
+            'other': {
+                "src": data.name
+            }
         }
         init: HsiDataset = HsiDataset(**init_dic)
         return init
@@ -108,5 +117,15 @@ class DataProcessor:
     def sort_edm_and_abu(dtrue: HsiDataset, dpred: HsiDataset, case: int = 2,
                          repeat: bool = False, edm_repeat: bool = False,
                          abu_repeat: bool = False, tip: bool = False):
-        hsiSort.sort_Edm_And_Abu(dtrue, dpred, case, repeat,
-                                 edm_repeat, abu_repeat, tip)
+        return hsiSort.sort_Edm_And_Abu(dtrue, dpred, case, repeat,
+                                        edm_repeat, abu_repeat, tip)
+
+    @classmethod
+    def oneClickProc(cls, data: HsiData, snr=0, normalization=True) -> HsiData:
+        data = cls.addNoise(data, snr)
+        data = cls.norm(data, normalization)
+        return data
+
+    @staticmethod
+    def getInitData(dataset_name: str, init_str: str):
+        return loadInitData(dataset_name, init_str)

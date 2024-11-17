@@ -1,9 +1,13 @@
 from typing import Dict
-from core.SmartMetrics import SmartMetrics
+from core import SmartMetrics, DataProcessor
+from utils import IsUtil, HsiUtil
+from custom_types import HsiDataset, HsiPropertyEnum
+
+dp = DataProcessor()
 
 
 class Metrics:
-    def __init__(self, dtrue, dpred):
+    def __init__(self, dtrue: HsiDataset, dpred: HsiDataset):
         self.dtrue = dtrue
         self.dpred = dpred
 
@@ -19,29 +23,29 @@ class Metrics:
         asad_y = 0
 
         # 计算丰度
-        if 'A' in dpred.keys():
+        if IsUtil.isAttr(dpred, 'A'):
             A_pred = dpred["A"]
             A_true = dtrue["A"]
             armse_a = sm.compute_RMSE_2(A_true, A_pred)
 
         # 计算端元
-        if 'E' in dpred.keys():
+        if IsUtil.isAttr(dpred, 'E'):
             E_pred = dpred["E"]
-            if len(E_pred.shape) == 3 and "E_3d" in dtrue.keys():
-                E_true = dtrue["E_3d"]
+            if len(E_pred.shape) == 3 and (dtrue.other and "E_3d" in dtrue.other.keys()):
+                E_true = dtrue.other["E_3d"]
             else:
-                E_true = dtrue["E"]
+                E_true = dtrue.edm
             asad_em = sm.compute_SAD(E_true, E_pred)[0]
 
         # 计算像元
-        if 'Y' in dpred.keys() or ('A' in dpred.keys() and 'E' in dpred.keys()):
-            if 'Y' in dpred.keys():
+        if IsUtil.isAttr(dpred, 'Y') or (IsUtil.isAttr(dpred, 'A') and IsUtil.isAttr(dpred, 'E')):
+            if IsUtil.isAttr(dpred, 'Y'):
                 Y_pred = dpred['Y']
             else:
-                Y_pred = sm.dp.generateY(e=dpred["E"], a=dpred["A"])
+                Y_pred = dp.gen_Y(e=dpred["E"], a=dpred["A"])
 
             armse_y = sm.compute_RMSE_2(dtrue["Y"], Y_pred)
-            asad_y = sm.compute_SAD(dtrue["Y"], Y_pred, type="Y")[0]
+            asad_y = sm.compute_SAD(dtrue["Y"], Y_pred, HsiPropertyEnum.Y)[0]
 
         d = {
             'armse_a': armse_a,

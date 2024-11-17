@@ -1,6 +1,14 @@
+import copy
+from enum import IntEnum
+
+
 class ABC:
     def __init__(self):
         self.a = 123
+        self.aaa = {
+            'b': 123,
+            'c': "fd"
+        }
 
     @property
     def num(self):
@@ -10,9 +18,22 @@ class ABC:
     def num(self, val):
         self.a = val
 
+    def copy(self):
+        return copy.deepcopy(self)
 
-x = ABC()
-print(x.num, x.a)
-x.num = 1
-print(x.num, x.a)
-print(x.__dict__)
+
+class TestEnum(IntEnum):
+    a = 1
+    b = 2
+
+
+def int_to_enum(value, enum_class) :
+    for item in enum_class:
+        if item.value == value:
+            return item
+    raise ValueError(f"{value} is not a valid enum value for {enum_class.__name__}")
+
+
+a: int = 0
+b = TestEnum(a)
+print(b.name)

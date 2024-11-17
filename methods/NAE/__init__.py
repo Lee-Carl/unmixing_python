@@ -1,6 +1,6 @@
 from typing import Any, Dict
 
-from ..Base import Base
+from custom_types import MethodBase
 from .model import Model
 import torch
 from torch.nn import MSELoss
@@ -10,9 +10,11 @@ from torch.utils.data import DataLoader
 from .pretrain_weight import pretrain_weight, pretrain_dec_nonlipart
 
 
-class NAE(Base):
+class NAE(MethodBase):
     def __init__(self, params, init):
         super().__init__(params, init)
+        self.params = params
+        self.init = init
 
     def run(self, savepath=None, output_display=True, *args: Any, **kwargs: Any) -> Dict:
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")

@@ -1,7 +1,8 @@
 import numpy as np
-from ..Base import Base
-from utils import extract_edm
+from custom_types import MethodBase
+from core.func.extract import extract_edm
 import copy
+
 
 def proj_simplex(data):
     """
@@ -29,9 +30,11 @@ def proj_simplex(data):
     return projected
 
 
-class FCLSU(Base):
-    def __init__(self, params, init) -> None:
-        super(FCLSU, self).__init__(params=params, init=init)
+class FCLSU(MethodBase):
+    def __init__(self, params, init):
+        super().__init__(params, init)
+        self.params = params
+        self.init = init
 
     def run(self, savepath=None, output_display=True, *args, **kwargs):
         """

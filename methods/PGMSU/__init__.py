@@ -7,7 +7,7 @@ import torch.utils
 import torch.utils.data
 import torch.nn as nn
 from .model import Model
-from ..Base import Base
+from custom_types import MethodBase
 from tqdm import tqdm
 
 
@@ -39,9 +39,9 @@ def weights_init(m):
         m.bias.data.fill_(0)
 
 
-class PGMSU(Base):
+class PGMSU(MethodBase):
     def __init__(self, params, init):
-        super(PGMSU, self).__init__(params, init)
+        super().__init__(params, init)
 
     def run(self, savepath=None, output_display=True, *args, **kwargs):
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")

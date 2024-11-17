@@ -1,8 +1,25 @@
 from enum import unique, IntEnum, auto
 
 
+class IntBaseEnum(IntEnum):
+    @classmethod
+    def get_name(cls, key: int):
+        for member in cls:
+            if member.value == key:
+                return member.name
+        raise ValueError(f"{cls.__name__}没有{key}属性")
+
+    @classmethod
+    def showProperty(cls):
+        print("-" * 50)
+        print(f"{cls.__name__}的成员变量有:")
+        for member in cls:
+            print(f"{member.value}.{member.name}")
+        print("-" * 50)
+
+
 @unique
-class DatasetsEnum(IntEnum):
+class DatasetsEnum(IntBaseEnum):
     """ 数据集 """
     # 真实数据集
     Samson = auto()
@@ -18,7 +35,7 @@ class DatasetsEnum(IntEnum):
 
 
 @unique
-class MethodsEnum(IntEnum):
+class MethodsEnum(IntBaseEnum):
     """ 解混方法 """
     FCLSU = auto()
     SCLSU = auto()
@@ -33,7 +50,7 @@ class MethodsEnum(IntEnum):
 
 
 @unique
-class InitE_Enum(IntEnum):
+class InitE_Enum(IntBaseEnum):
     """ 初始化endmember的方法 """
     GT = auto()
     VCA = auto()
@@ -41,7 +58,7 @@ class InitE_Enum(IntEnum):
 
 
 @unique
-class InitA_Enum(IntEnum):
+class InitA_Enum(IntBaseEnum):
     """ 初始化 abundanceMap 的方法 """
     GT = auto()
     FCLSU = auto()
@@ -50,21 +67,21 @@ class InitA_Enum(IntEnum):
 
 
 @unique
-class HsiPropertyEnum(IntEnum):
+class HsiPropertyEnum(IntBaseEnum):
     Y = auto()
     E = auto()
     A = auto()
 
 
 @unique
-class ModeEnum(IntEnum):
+class ModeEnum(IntBaseEnum):
     Run = 1
     Param = 2
     Test = 3
 
 
 @unique
-class MetricsEnum(IntEnum):
+class MetricsEnum(IntBaseEnum):
     RMSE1 = auto()
     RMSE2 = auto()
     SAD1 = auto()

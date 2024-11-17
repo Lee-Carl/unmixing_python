@@ -8,7 +8,7 @@
 
 ## 2.使用
 - 通过requirements.txt安装py库，或者自行安装（建议版本至少为py37+pytorch 1.0.0）；
-- 在`config/main_config.yaml`下写配置信息，然后点击`main.py`运行即可。
+- 在`main.py`中写配置信息，然后点击运行即可。
 
 ## 3.值得学习的github库
 - Hyperspectral-Imaging ([很全面的库](https://github.com/xianchaoxiu/Hyperspectral-Imaging))

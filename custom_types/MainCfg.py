@@ -1,4 +1,5 @@
 from typing import List
+from .enums import InitA_Enum, InitE_Enum, DatasetsEnum, ModeEnum, MethodsEnum
 
 
 class MainConfig_Init:
@@ -8,14 +9,14 @@ class MainConfig_Init:
         self.custom_init_method: str = kwargs.get('custom_init_method', None)
         self.snr: float = kwargs.get('snr', 0)
         self.normalization: bool = kwargs.get('normalization', False)
-        self.A: str = kwargs.get('A', None)
-        self.E: str = kwargs.get('E', None)
-        self.D: str = kwargs.get('D', None)
+        self.A: InitA_Enum = InitA_Enum(kwargs.get('A'))
+        self.E: InitE_Enum = InitE_Enum(kwargs.get('E'))
+        self.D: int = kwargs.get('D', None)
 
 
 class MainConfig_Output:
     def __init__(self, **kwargs):
-        self.draw: bool = kwargs.get('draw', False)
+        self.draw: str = kwargs.get('draw', False)
         self.normalization: bool = kwargs.get('normalization', False)
         self.sort: bool = kwargs.get('sort', False)
         self.metrics: str = kwargs.get('metrics', None)
@@ -24,14 +25,16 @@ class MainConfig_Output:
 class MainConfig_Params:
     def __init__(self, **kwargs):
         self.obj: str = kwargs.get('obj', None)
-        self.around: List[float] = eval(kwargs[kwargs['around']]) if kwargs['around'] else None
+        self.around: List[float] = kwargs['around'] if kwargs['around'] else None
 
 
 class MainCfg:
     def __init__(self, **kwargs):
-        self.dataset: str = kwargs.get('dataset', None)
+        self.dataset: DatasetsEnum = DatasetsEnum(kwargs.get('dataset'))
+        self.method: MethodsEnum = MethodsEnum(kwargs.get("method"))
+        self.seed: int = kwargs.get('seed', 0)
+        self.mode: ModeEnum = ModeEnum(kwargs.get('mode'))
         self.init: MainConfig_Init = MainConfig_Init(**kwargs['init']) if kwargs['init'] else None
-        self.mode: str = kwargs.get('mode', None)
         self.params: MainConfig_Params = MainConfig_Params(**kwargs['params']) if kwargs['params'] else None
         self.output: MainConfig_Output = MainConfig_Output(**kwargs['output']) if kwargs['output'] else None
-        self.seed: int = kwargs.get('seed', 0)
+

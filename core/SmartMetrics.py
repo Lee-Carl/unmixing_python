@@ -56,9 +56,9 @@ class SmartMetrics:
                 aSAD, SAD = self.mt.compute_SAD_2(data_true=data_true, data_pred=data_pred)
         return aSAD, SAD
 
-    def compute_SAD(self, E_true, E_pred, type='E'):
+    def compute_SAD(self, E_true, E_pred, prop: HsiPropertyEnum = HsiPropertyEnum.E):
         if len(E_pred.shape) == 2:
-            shape = HsiUtil.getShapeForData(HsiPropertyEnum.E, self.data)
+            shape = HsiUtil.getShapeForData(prop, self.data)
             E_true = HsiUtil.changeDims(E_true, shape)
             E_pred = HsiUtil.changeDims(E_pred, shape)
             aSAD, SAD = self.mt.compute_SAD(data_true=E_true, data_pred=E_pred)

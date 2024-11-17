@@ -29,5 +29,9 @@ class FileUtil:
             yaml.dump(data, file, default_flow_style=default_flow_style)
 
     @staticmethod
+    def readYamlFile(fpath: str, data: dict, mode: str = 'w', default_flow_style: bool = False):
+        pass
+
+    @staticmethod
     def savemat(fpath: str, data: dict):
         sio.savemat(fpath, data)

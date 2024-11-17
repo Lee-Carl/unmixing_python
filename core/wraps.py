@@ -1,5 +1,27 @@
 import functools
 from typing import Callable, Any
+import numpy as np
+
+
+# 用来去除初始化数据中整数总是带有"[[]]"的问题
+def remove_after_loadmat(func):
+    def wrapper(*args, **kwargs):
+        flag, data = func(*args, **kwargs)
+        # flag如果为true，后面跟的数据需要进行处理
+        if flag:
+            data_key1 = ['P', 'L', 'N', 'H', 'W']
+            data_key2 = ['Y', 'A', 'E', 'D']
+            # 对keys的数据进行降维
+            for key in data_key1:
+                if key in data.keys() and np.ndim(data[key]) >= 1:
+                    data[key] = data[key].item()
+            # 对data_key转换数据类型
+            for key in data_key2:
+                if key in data.keys() and isinstance(data[key], np.ndarray):
+                    data[key] = data[key].astype(np.float32)
+        return flag, data
+
+    return wrapper
 
 
 def checkShape(func):

@@ -8,8 +8,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 from .model2 import Model
 import core.restraint as restraint
-from core.extract import extract_edm
-from ..Base import Base
+from core.func.extract import extract_edm
+from custom_types import MethodBase
 
 
 def init_weights(m):
@@ -22,9 +22,11 @@ def init_weights(m):
         torch.nn.init.zeros_(m.bias)
 
 
-class SUnCNN(Base):
+class SUnCNN(MethodBase):
     def __init__(self, params, init):
-        super(SUnCNN, self).__init__(params, init)
+        super().__init__(params, init)
+        self.params = params
+        self.init = init
 
     def run(self, savepath=None, output_display=True, *args, **kwargs):
         # Hyperparameters

@@ -1,18 +1,19 @@
 from core import ModeAdapter
 from .run import RunMode
 from .params import ParamsMode
+from custom_types import MainCfg, ModeEnum
 
 
 class Unmixing:
-    def __init__(self, data=None):
-        self.r = RunMode()
-        self.p = ParamsMode()
+    def __init__(self, dic: dict):
+        self.cfg = MainCfg(**dic)
+
+    def getMode(self):
+        if self.cfg.mode == ModeEnum.Run:
+            return RunMode(self.cfg)
+        if self.cfg.mode == ModeEnum.Param:
+            return ParamsMode(self.cfg)
+        print("Check the 'mode' field in main_config.yaml, and maybe there's something wrong!")
 
     def __call__(self):
-        cp = ModeAdapter()
-        if cp.cfg.mode == "run":
-            self.r.run()
-        elif cp.cfg.mode == "params":
-            self.p.run()
-        else:
-            print("Check the 'mode' field in main_config.yaml, and maybe there's something wrong!")
+        self.getMode().run()

@@ -6,7 +6,8 @@ import os
 from tqdm import tqdm
 from .model import Model
 from .restraint import SparseKLloss, SumToOneLoss, NonZeroClipper
-from core.extract import extract_edm
+from core.func.extract import extract_edm
+from custom_types import MethodBase
 
 
 # Define Dataset
@@ -23,8 +24,9 @@ class MyTrainData(torch.utils.data.Dataset):
         return 1
 
 
-class CyCU:
+class CyCU(MethodBase):
     def __init__(self, params, init):
+        super().__init__(params, init)
         self.params = params
         self.init = init
 
