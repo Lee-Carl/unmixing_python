@@ -2,7 +2,7 @@ from abc import abstractmethod
 from typing import Any, Dict
 
 
-class Base:
+class MethodBase:
     def __init__(self, params, init):
         self.params = params
         self.init = init

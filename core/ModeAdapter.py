@@ -1,10 +1,9 @@
 import shutil
 
 from .config import MainConfig, MethodsConfig, PrepareConfig
-from custom_types import MainCfg, HsiDataset
+from custom_types import MainCfg, HsiDataset, MethodBase
 from utils import FileUtil
 from .DataProcessor import DataProcessor
-from .load import loadhsi
 import os
 import re
 import copy
@@ -34,7 +33,7 @@ class ModeAdapter:
         return self.cfg.init.custom_init_data if self.cfg.init.custom_init_data else f'{str(self.cfg.init.snr)}db_{self.cfg.init.E}_{self.cfg.init.A}'
 
     def get_Dataset(self):
-        loadhsi(self.cfg.dataset)
+        dp.loadhsi(self.cfg.dataset)
 
     def get_InitData(self, dataset: HsiDataset, replace=False):
         # 数据集名称
