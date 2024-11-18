@@ -2,6 +2,9 @@ import numpy as np
 from custom_types import HsiDataset, HsiData
 from typing import Tuple
 from custom_types import HsiPropertyEnum
+from sklearn.feature_extraction.image import extract_patches_2d
+import torch
+from torch.utils.data import DataLoader
 
 
 class HsiUtil:
@@ -69,3 +72,26 @@ class HsiUtil:
             Y = np.squeeze(Y, axis=1)  # y=(10**4,198)
             Y = Y.T  # y=(198,10**4)
             return Y
+
+    @staticmethod
+    def gen_DataLoader(pixels: HsiData, patch_size: Tuple[int, int], num_patches: int, batch_size: int):
+        """ 将像元裁切，并导出一个数据集 """
+        # 随机提取原始图像patch大小尺寸图片
+        # pixels必须是 L * H * W
+        pixels_numpy = pixels.transpose((1, 2, 0))
+
+        input_patches = extract_patches_2d(
+            pixels_numpy,
+            max_patches=num_patches,
+            patch_size=patch_size,
+        )
+
+        input_patches = torch.Tensor(input_patches.transpose((0, 3, 1, 2)))
+
+        # Dataloader
+        dataloader = DataLoader(
+            input_patches,
+            batch_size=batch_size,
+            shuffle=True,
+        )
+        return dataloader

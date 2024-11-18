@@ -52,7 +52,6 @@ class CNNAEU(MethodBase):
 
         # num_patches = int(250 * H * W * L / (307 * 307 * 162))
         num_patches = int(params['num_patches'])
-
         Y_numpy = Y.reshape((L, H, W)).transpose((1, 2, 0))
 
         input_patches = extract_patches_2d(
