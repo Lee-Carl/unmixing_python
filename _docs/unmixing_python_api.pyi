@@ -2,12 +2,36 @@ from custom_types import HsiDataset, HsiData, DatasetsEnum, InitA_Enum, InitE_En
 
 ''' core.func '''
 
-def extract_edm(y, a): ...
+def extract_edm(y: HsiData, a:HsiData)-> HsiData: ...
+"""
+    提取端元
+
+    Args:
+        y: 像元数据
+        a: 预测的丰度数据
+
+    Returns:
+        预测的端元数据
+"""
 
 def sort_Edm_And_Abu(dtrue: HsiDataset, dpred: HsiDataset, case: int = 2, repeat: bool = False,
                      edm_repeat: bool = False, abu_repeat: bool = False,
                      tip: bool = False): ...
+"""
+    对端元和丰度排序，使两者一致
 
+    Args:
+        dtrue: 像元数据
+        dpred: 预测的丰度数据
+        case: 使用哪一种方式排序
+        repeat: 是否允许端元+丰度重复, true允许
+        edm_repeat: 是否允许端元+丰度重复, true允许
+        abu_repeat: 是否允许端元+丰度重复, true允许
+        tip:
+
+    Returns:
+        排序后的数据
+"""  
 
 def __get_similarity_matrix(true_, pred_, P, similarity_func, tip=None): ...
 
@@ -22,16 +46,48 @@ def __sort_framework(true_, pred_, P, func, repeat): ...
 
 
 def sort_edm(dtrue, dpred, P, func=None, repeat=False): ...
+"""
+    对端元排序
 
+    Args:
+        dtrue: 像元数据
+        dpred: 预测的丰度数据
+        P: 端元数
+        func: 排序函数。如果不填写自定义的排序函数，会使用默认的排序函数
+        repeat: 是否允许重复
+
+    Returns:
+        排序好的端元数据
+"""
 
 def sort_abu(dtrue, dpred, P, func=None, repeat=False): ...
+"""
+    对丰度排序
 
+    Args:
+        dtrue: 像元数据
+        dpred: 预测的丰度数据
+        P: 端元数
+        func: 排序函数。如果不填写自定义的排序函数，会使用默认的排序函数
+        repeat: 是否允许重复
+
+    Returns:
+        排序好的丰度数据
+"""
 
 ''' core.load '''
 
 
 def loadhsi(case: str) -> HsiDataset: ...
+"""
+    导入数据集
 
+    Args:
+        case: 数据集名称。使用时，可以手写数据集名称，但必须与config.settings.data_loader.yaml中的数据集名称一致;也可以通过DatasetsEnum，并使用get_name()实现
+
+    Returns:
+        包装成HsiDataset的数据集
+"""
 
 def loadInitData(dataset_name: str, init_str: str): ...
 
