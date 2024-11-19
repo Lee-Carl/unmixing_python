@@ -5,7 +5,7 @@ from custom_types import HsiDataset, HsiData, DatasetsEnum, InitA_Enum, InitE_En
 def extract_edm(y: HsiData, a:HsiData)-> HsiData: ...
 """
     提取端元
-
+main 144
     Args:
         y: 像元数据
         a: 预测的丰度数据
@@ -258,14 +258,57 @@ class DataProcessor:
 
     @staticmethod
     def sort_edm(dtrue: HsiData, dpred: HsiData, P, func=None, repeat: bool = False): ...
+    """
+        对端元进行排序
+
+        Args:
+            dtrue: 真实的端元数据
+            dpred: 预测的端元数据
+            P: 端元数
+            func: (选填)排序函数。
+            repeat: (选填)允许重复。
+
+        Returns:
+            排序后的端元数据
+    """
 
     @staticmethod
     def sort_abu(dtrue: HsiData, dpred: HsiData, P, func=None, repeat: bool = False): ...
+    """
+        对丰度进行排序
+
+        Args:
+            dtrue: 真实的丰度数据
+            dpred: 预测的丰度数据
+            P: 端元数
+            func: (选填)排序函数。
+            repeat: (选填)允许重复。
+
+        Returns:
+            排序后的丰度数据
+    """
 
     @staticmethod
     def sort_edm_and_abu(dtrue: HsiDataset, dpred: HsiDataset, case: int = 2,
                          repeat: bool = False, edm_repeat: bool = False,
                          abu_repeat: bool = False, tip: bool = False): ...
+    """
+        对丰度和端元进行排序
+
+        Args:
+            dtrue: 真实的丰度数据集
+            dpred: 包装成HsiDataset的预测数据
+            case: (选填)排序方法，可选值有: 1，2
+            P: 端元数
+            func: (选填)排序函数。
+            repeat: (选填)允许重复。
+            edm_repeat: (选填)允许端元重复。
+            abu_repeat: (选填)允许丰度重复。
+            tip: (选填)提示。
+
+        Returns:
+            排序后的端元、丰度数据
+    """
 
     @classmethod
     def oneClickProc(cls, data: HsiData, snr=0, normalization=True) -> HsiData: ...
@@ -327,6 +370,16 @@ class ModeAdapter:
     def run(method, params: dict, init: HsiDataset, savepath=None, output_display=True) -> HsiDataset: ...
     """
         运行模型
+        
+        Args:
+            method: 解混方法
+            params: 解混参数，对应config.methods目录下的文件。
+            init: 包装成HsiDataset的初始化数据集
+            savepath: (选填)存储路径
+            output_display: (选填)是否显示进度条
+
+        Returns:
+            包装成HsiDataset的预测数据集
     """
 
     def get_Params_adjust(self): ...
@@ -338,20 +391,28 @@ class ModeAdapter:
     def sort_EndmembersAndAbundances(dataset: HsiDataset, datapred: HsiDataset) -> HsiDataset: ...
     """
         对端元和丰度进行排序
+        运行模型
+        
+        Args:
+            dataset: 真实数据集
+            datapred: 包装成HsiDataset的预测数据
+
+        Returns:
+            排序后的预测数据
     """
 
-    def compute(self, dataset, datapred, out_path=None): ...
+    def compute(self, dataset, datapred, out_path=None)->None: ...
     """
         调用自定义的指标类
     """
 
-    def draw(self, dataset, datapred, out_path=None): ...
+    def draw(self, dataset, datapred, out_path=None)->None: ...
     """
         调用自定义的绘画类
     """
 
 
-class MyLog:
+class MyLog: # 日志类
     def __init__(self, cfg: MainCfg): ...
 
     def __genOutDir(self) -> str: ...
@@ -367,7 +428,7 @@ class MyLog:
     def record_inyaml(content, outpath): ...
 
 
-class SmartMetrics:
+class SmartMetrics: # 计算指标，在原本的基础上增加了对数据的形状判断
     def __init__(self, dataset: HsiDataset, tip=True) -> None: ...
 
     def compute_RMSE(self, A_true, A_pred): ...
