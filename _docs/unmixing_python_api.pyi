@@ -220,12 +220,41 @@ class DataProcessor:
 
     @staticmethod
     def addNoise(data: HsiData, snr: float) -> HsiData: ...
+    """
+        增加噪声
+
+        Args:
+            data: 数据
+            snr: 噪声(db)
+
+        Returns:
+            增加过噪声的数据
+    """
 
     @staticmethod
     def norm(data, normalization=True) -> HsiData: ...
+    """
+        归一化数据
+
+        Args:
+            data: 数据
+
+        Returns:
+            归一化后的数据
+    """
 
     @staticmethod
     def gen_Y(e, a): ...
+    """
+        通过端元和丰度合成像元数据
+
+        Args:
+            e: 端元数据
+            a: 丰度数据
+
+        Returns:
+            合成的像元数据
+    """
 
     @staticmethod
     def sort_edm(dtrue: HsiData, dpred: HsiData, P, func=None, repeat: bool = False): ...
@@ -240,37 +269,86 @@ class DataProcessor:
 
     @classmethod
     def oneClickProc(cls, data: HsiData, snr=0, normalization=True) -> HsiData: ...
+    """
+        一键处理数据(增加噪声、归一化)
+
+        Args:
+            data: 数据
+            snr: 分贝
+            normalization: 是否归一化
+
+        Returns:
+            处理后的数据
+    """
 
     @staticmethod
     def getInitData(dataset_name: str, init_str: str): ...
+    """
+        得到初始化数据
+
+        Args:
+            dataset_name: 数据名称
+            init_str: 初始化的方式
+
+        Returns:
+            初始化数据
+    """
 
 
 class ModeAdapter:
     def __init__(self, cfg: MainCfg): ...
 
     def set_seed(self, seed: int = 0): ...
+    """
+        固定随机种子
+    """
 
     def __getInitStr(self) -> str: ...
 
     def get_Dataset(self) -> HsiDataset: ...
+    """
+        得到数据集
+    """
 
     def get_InitData(self, dataset: HsiDataset, replace=False) -> HsiDataset: ...
+    """
+        得到初始化数据
+    """
 
     def get_Model(self): ...
+    """
+        得到解混方法
+    """
 
     def get_params(self) -> dict: ...
+    
 
     @staticmethod
     def run(method, params: dict, init: HsiDataset, savepath=None, output_display=True) -> HsiDataset: ...
+    """
+        运行模型
+    """
 
     def get_Params_adjust(self): ...
+    """
+        得到调整的参数，对应配置表的"params"信息
+    """
 
     @staticmethod
     def sort_EndmembersAndAbundances(dataset: HsiDataset, datapred: HsiDataset) -> HsiDataset: ...
+    """
+        对端元和丰度进行排序
+    """
 
     def compute(self, dataset, datapred, out_path=None): ...
+    """
+        调用自定义的指标类
+    """
 
     def draw(self, dataset, datapred, out_path=None): ...
+    """
+        调用自定义的绘画类
+    """
 
 
 class MyLog:
@@ -293,14 +371,31 @@ class SmartMetrics:
     def __init__(self, dataset: HsiDataset, tip=True) -> None: ...
 
     def compute_RMSE(self, A_true, A_pred): ...
+    """
+        计算RMSE(详情见CYCU的RMSE)
+    """
 
     def compute_RMSE_2(self, A_true, A_pred): ...
+    """
+        计算RMSE(详情见PGMSU的RMSE)
+    """
 
-    def compute_RMSE_a2(self, A_true, A_pred):
-        if A_true.shape != A_pred.shape: ...
+    def compute_RMSE_a2(self, A_true, A_pred): ...
+    """
+        计算RMSE
+    """
 
     def compute_SAD_3D(self, data_true, data_pred): ...
+    """
+        计算SAD, 用于处理这种情况: 模拟数据集的端元是三维的，而模型只能生成二维的端元数据。
+    """
 
     def compute_SAD(self, E_true, E_pred, prop: HsiPropertyEnum = HsiPropertyEnum.E): ...
+    """
+        计算SAD, 适用计算的情况：参与计算的数据都是二维，或都是三维的
+    """
 
     def compute_SRE(self, A_true, A_pred): ...
+    """
+        计算SRE
+    """
