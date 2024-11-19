@@ -95,18 +95,53 @@ def loadInitData(dataset_name: str, init_str: str): ...
 class ModuleLoader:
     @staticmethod
     def get_Metrics_Function(way: str): ...
+    """
+        Args:
+            way: 指标函数名
+
+        Returns:
+            指标函数
+    """
 
     @staticmethod
     def get_Draw_Function(way: str): ...
+    """
+        Args:
+            way: 函数名
+
+        Returns:
+            用matplotlib库实现的函数
+    """
 
     @staticmethod
     def get_Init_Function(way: str): ...
+    """
+        Args:
+            way: 初始化函数名
+
+        Returns:
+            初始化函数
+    """
 
     @staticmethod
     def get_Method(method_name: str): ...
+    """
+        Args:
+            way: 解混方法名
+
+        Returns:
+            解混方法
+    """
 
     @staticmethod
     def get_Method_params(dataset_name: str, method_name: str) -> dict: ...
+    """
+        Args:
+            way: 指标函数名
+
+        Returns:
+            指标函数
+    """
 
 
 ''' core '''
@@ -115,20 +150,73 @@ class ModuleLoader:
 class DataProcessor:
     @staticmethod
     def loadDatast(case: DatasetsEnum) -> HsiDataset: ...
+    """
+        Args:
+            case: 数据集相关的枚举变量
+
+        Returns:
+            数据集
+    """
 
     @staticmethod
-    def set_seed(seed: int = 0): ...
+    def set_seed(seed: int = 0)->None: ...
+    """
+        固定随机种子。 固定的是pytorch + numpy + random(py自带)库的随机种子
+
+        Args:
+            seed: 随机种子
+    """
 
     @classmethod
     def gen_initData(cls, data: HsiDataset, initE: InitE_Enum, initA: InitA_Enum, initD: int = None,
                      snr: float = 0, normalization: bool = True, seed: int = 0) -> HsiDataset: ...
+    """
+        生成端元和，丰度数据
+
+        Args:
+            data: 数据集
+            initE: 初始化端元的方式
+            initA: 初始化丰度的方式
+            initD: 未实现的功能，不用传此参数。
+            snr: 噪声
+            normalization: 是否要正则化
+            seed: 随机种子
+
+        Returns:
+           包装成HsiDataset的初始化数据
+    """
 
     @staticmethod
     def gen_endmembers(Y_init: HsiData, dataset: HsiDataset, initE: InitE_Enum, seed=0) -> HsiData: ...
+    """
+        生成端元数据
+
+        Args:
+            Y_init: 混元数据
+            dataset: 数据集
+            initE: 初始化端元的方式
+            seed: 随机种子
+
+        Returns:
+            生成的端元数据
+    """
 
     @staticmethod
     def gen_abundances(Y_init: HsiData, E_init: HsiData, dataset: HsiDataset, initA: InitA_Enum,
                        seed=0) -> HsiData: ...
+    """
+        生成丰度数据
+
+        Args:
+            Y_init: 混元数据
+            dataset: 数据集
+            E_init: 初始化端元的方式
+            initA: 初始化丰度的方法
+            seed: 随机种子
+
+        Returns:
+            生成的端元数据
+    """
 
     @staticmethod
     def addNoise(data: HsiData, snr: float) -> HsiData: ...
