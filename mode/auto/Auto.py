@@ -4,9 +4,8 @@ import matplotlib.pyplot as plt
 import xlsxwriter as xw
 import shutil
 import os
-import datetime
+
 import scipy.io as sio
-from core.init import Norm
 import core.draw as draw
 from core.load import loadhsi
 from core.SmartMetrics import SmartMetrics
@@ -15,8 +14,9 @@ from .draw import AutoDraw
 import numpy as np
 from core.init import Norm
 from matplotlib.font_manager import FontProperties
-from matplotlib.text import Annotation
 from matplotlib.colors import Normalize
+from utils import FileUtil
+
 
 # note:对已经收录的方法进行的比较
 autometrics = AutoMetrics()  # 设置一套计算指标的方法
@@ -34,7 +34,7 @@ class Auto:
     def get_PredData(self, model, case):
         dst = self.dst
         pred_dir = os.path.join(dst, model, case)
-        latest_dir = self.get_latest_directory(self.get_subdirectories(pred_dir))
+        latest_dir = FileUtil.get_latest_directory(FileUtil.get_subdirectories(pred_dir))
         results_file = os.path.join(latest_dir, self.obj_file)
         data_pred = sio.loadmat(results_file)
         return data_pred
@@ -222,7 +222,7 @@ class Auto:
             # 生成保存地址
             savepath = os.path.join(self.dst, self.draw, f'{case}')
             # self.createdir(os.path.join(os.path.join(self.dst, '_draw')))
-            self.createdir(savepath)
+            FileUtil.createdir(savepath)
             # 导出真实数据
             dtrue = loadhsi(case)
             dtrue['Y'] = Norm.max_norm(dtrue['Y'])
@@ -256,7 +256,7 @@ class Auto:
             # 生成保存地址
             savepath = os.path.join(self.dst, self.draw, f'{case}')
             # self.createdir(os.path.join(os.path.join(self.dst, '_draw')))
-            self.createdir(savepath)
+            FileUtil.createdir(savepath)
             # 导出真实数据
             dtrue = loadhsi(case)
             dtrue['Y'] = Norm.max_norm(dtrue['Y'])
@@ -291,46 +291,17 @@ class Auto:
             data = 0
         return data
 
-    @staticmethod
-    def createdir(dn):
-        # 若目录不存在,则创建目录
-        if not os.path.exists(dn):
-            os.makedirs(dn)
 
-    @staticmethod
-    def get_subdirectories(directory):
-        subdirectories = []
-        for item in os.listdir(directory):
-            item_path = os.path.join(directory, item)
-            if os.path.isdir(item_path):
-                subdirectories.append(item_path)
-        return subdirectories
 
     def get_PredDataDir(self, model, case):
         pred_dir = os.path.join(self.dst, model, case)
-        latest_dir = self.get_latest_directory(self.get_subdirectories(pred_dir))
+        latest_dir = FileUtil.get_latest_directory(FileUtil.get_subdirectories(pred_dir))
         results_file = os.path.join(latest_dir, self.obj_file)
         return results_file
 
-    @staticmethod
-    def get_latest_directory(directories):
-        # 获取所有目录的创建时间
-        dir_ctimes = [(directory, datetime.datetime.fromtimestamp(os.path.getctime(directory))) for directory in
-                      directories]
-        # 找到创建时间最新的目录
-        latest_dir = sorted(dir_ctimes, key=lambda x: x[1], reverse=True)[0]
-        return latest_dir[0]
 
-    @staticmethod
-    def is_directory_empty(directory):
-        # 获取目录下的所有文件和子目录名称
-        files_and_directories = os.listdir(directory)
 
-        # 检查列表是否为空
-        if len(files_and_directories) == 0:
-            return True
-        else:
-            return False
+
 
     def getLatestDirInfo(self):
         src = self.src
@@ -350,11 +321,11 @@ class Auto:
                             break
                         # 是目录；非空；不以params开头
                         if os.path.isdir(record_dir) and \
-                                not self.is_directory_empty(record_dir) and \
+                                not FileUtil.is_directory_empty(record_dir) and \
                                 not record.startswith('params'):
                             sub_dirs.append(record_dir)
                     if sub_dirs:
-                        src_file = self.get_latest_directory(sub_dirs)  # 源目录绝对地址
+                        src_file = FileUtil.get_latest_directory(sub_dirs)  # 源目录绝对地址
                         dst_file = src_file.replace(src, dst)  # 目标目录绝对地址
                         shutil.copytree(src_file, dst_file)  # copytree会创建虚拟的目录树，从而能在目标目录不存在时完成复制
 
