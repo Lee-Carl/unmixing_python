@@ -1,85 +1,39 @@
 from core.consts import RESULTS_DIR
-from core import DataProcessor
-from custom_types import DatasetsEnum, MethodsEnum
+from core import DataProcessor, consts
+from custom_types import DatasetsEnum, MethodsEnum, HsiDataset, ModeEnum
 from typing import Union
+import scipy.io as sio
+
+from utils import FileUtil
+
 dp = DataProcessor()
 
 
 class ResultLoader:
-    def __init__(self, dataset: Union[DatasetsEnum,None]=None, method: Union[MethodsEnum,None]=None, idx: int = 1, path: str = ''):
-        self.dataset = dataset
+
+    def __init__(self,
+                 dataset: Union[DatasetsEnum, None] = None,
+                 method: Union[MethodsEnum, None] = None,
+                 mode: ModeEnum = ModeEnum.Run,
+                 idx: int = 1, path: str = ''):
+        self.datasetName = dataset
         self.method = method
         self.idx = idx
         self.path = path
-        self.data = self.get_Data()
+        self.data = self.get_ResultData(dataset=dataset, method=method, mode=mode, idx=idx, path=path)
+        self.dataset = dp.loadDatast(dataset)
 
     @staticmethod
-    def get_Data(dataset: DatasetsEnum, method: MethodsEnum, idx: int = 1, path: str = ''):
-        if relpath:
-            dtrue_name = [part for part in relpath.split("/") if part != ""]
-            dtrue_name = dtrue_name[2]
-            dtrue = dp.loadDatast(dtrue_name)
-            file = f'{MAIN_DIR}/{relpath}/results.mat'
-            dpred = sio.loadmat(file)
-            return dtrue, dpred
-        elif abspath and datasetName:
-            dtrue = ip.loadhsi(datasetName)
-            dpred = sio.loadmat(abspath)
-            return dtrue, dpred
-        else:
-            print("请提供(方式一)相对地址，或(方式二)绝对地址和数据集名称")
-            exit(0)
-
-    def analysis_params(self, abspath=None, relpath=None):
-        if abspath:
-            route = abspath
-        else:
-            route = self.get_Abspath_ByRelpath(relpath)
-
-        # 分析调参程序
-        pm.analysis_params(route)
-
-    @staticmethod
-    def test_initdata(replace=False):
-        cp = ModeAdapter()
-        cp.set_seed()
-        dataset = cp.get_Dataset()
-        init = cp.get_InitData(dataset, replace=replace)
-        rm.test_initData(dataset, init)
-
-    def draw(self, abspath=None, datasetName=None, relpath=None):
-        dtrue, dpred = self.get_Data(abspath=abspath, datasetName=datasetName, relpath=relpath)
-
-        un = InitProcessor()
-        dtrue['Y'] = un.normalization(dtrue['Y'])
-        rm.get_Pictures(dtrue, dpred)
-
-    def compute(self, abspath=None, datasetName=None, relpath=None):
-        data_true, dpred = self.get_Data(abspath=abspath, datasetName=datasetName, relpath=relpath)
-
-        un = InitProcessor()
-        data_true['Y'] = un.normalization(data_true['Y'])
-
-        sm = rm.get_Metrics(data_true, dpred)
-        print(sm.__str__())
-        dd = rm.get_Pictures(data_true, dpred)
-        dd()
-
-        # epred2 = extract_edm(data_true['Y'], data_pred['A'])
-        # print(sm.compute_SAD(data_true['E'], epred2))
-
-    def changeshape(self, abspath=None, datasetName=None, relpath=None):
-        data_true, data_pred = self.get_Data(abspath=abspath, datasetName=datasetName, relpath=relpath)
-
-        un = InitProcessor()
-        data_true['Y'] = un.normalization(data_true['Y'])
-
-        dp = DataProcessor(data_true)
-
-        data_pred = dp.sort_EndmembersAndAbundances(data_true, data_pred)
-        P, H, W = data_true['P'], data_true['H'], data_true['W']
-
-        abu3d = data_pred['A'].reshape(P, H, W)
-        for i, abu in enumerate(abu3d):
-            abu3d[i, :, :] = abu.T
-        data_pred['A'] = abu3d.reshape(P, -1)
+    def get_ResultData(dataset: DatasetsEnum, method: MethodsEnum, mode: ModeEnum, idx: int = 1,
+                       path: str = '') -> HsiDataset:
+        filepath: str = ''
+        if path:
+            filepath = f'{path}/{consts.RESULTS_FILE}'
+        elif dataset and method:
+            pre: str = consts.RESULTS_RUN_DIR_PREFIX if mode == ModeEnum.Run else consts.RESULTS_PARAMS_DIR_PREFIX
+            filepath = f'{method.name}/{dataset.name}/{pre}{idx}/{consts.RESULTS_FILE}'
+        if len(filepath) == 0:
+            raise ValueError("请检查传递的参数")
+        absPath: str = FileUtil.getAbsPath_ByRelativepath(filepath)
+        data: dict = sio.loadmat(absPath)
+        return HsiDataset(**data)

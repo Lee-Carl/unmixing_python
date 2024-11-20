@@ -18,3 +18,7 @@ REAL_DATASET_DIR = f'{anchor}/data/dataset/real/'
 SIMULATED_DATASET_DIR = f'{anchor}/data/dataset/simulate/'
 DATA_LOADER_CONFIG = f'{anchor}/config/setting/dataset_loader.yaml'
 RESULTS_DIR = f'{anchor}/res/'
+# 实验结果
+RESULTS_FILE = 'results.mat'
+RESULTS_RUN_DIR_PREFIX = ''
+RESULTS_PARAMS_DIR_PREFIX = 'params_'
