@@ -1,8 +1,8 @@
 from typing import Union, Dict, Any
-import numpy as np
 import copy
-from utils.TypeUtil import TypeUtil
 from .type_alias import HsiData
+from utils.TypeUtil import TypeUtil
+
 
 class HsiDataset(object):
     def __init__(self, **data: Dict[str, Dict[str, Any]]):

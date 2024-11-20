@@ -1,6 +1,6 @@
 from typing_extensions import get_args
 
-from custom_types import HsiData
+from custom_types.type_alias import HsiData
 from typing import Any
 
 
