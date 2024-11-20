@@ -1,5 +1,8 @@
 import copy
 from enum import IntEnum
+from typing import Union
+
+from typing_extensions import get_args, TypeAlias
 
 
 class ABC:
@@ -27,13 +30,17 @@ class TestEnum(IntEnum):
     b = 2
 
 
-def int_to_enum(value, enum_class) :
+def int_to_enum(value, enum_class):
     for item in enum_class:
         if item.value == value:
             return item
     raise ValueError(f"{value} is not a valid enum value for {enum_class.__name__}")
 
 
-a: int = 0
-b = TestEnum(a)
-print(b.name)
+etype: TypeAlias = Union[int, float]
+print(get_args(etype))
+a = 1
+print(isinstance(a, get_args(etype)))
+
+b = '1'
+print(isinstance(b, get_args(etype)))

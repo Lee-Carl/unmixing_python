@@ -1,15 +1,14 @@
-from typing import Union, Dict, Any, Union
+from typing import Union, Dict, Any, TypeAlias, get_args
 import numpy as np
 import copy
-
-HsiData = Union[np.float32, float, np.ndarray]
-
+from utils.TypeUtil import TypeUtil
+from .type_alias import HsiData
 
 class HsiDataset(object):
     def __init__(self, **data: Dict[str, Dict[str, Any]]):
-        assert isinstance(data["Y"], HsiData.__args__), f"数据集中像元类型有误为{type(data['Y'])}"
-        assert isinstance(data["E"], HsiData.__args__), f"数据集中端元类型有误为{type(data['E'])}"
-        assert isinstance(data["A"], HsiData.__args__), f"数据集中丰度类型有误为{type(data['A'])}"
+        assert TypeUtil.is_HsiData(data['Y']), f"数据集中像元类型有误为{type(data['Y'])}"
+        assert TypeUtil.is_HsiData(data['E']), f"数据集中端元类型有误为{type(data['E'])}"
+        assert TypeUtil.is_HsiData(data['A']), f"数据集中丰度类型有误为{type(data['A'])}"
         # assert isinstance(data["D"], HsiData.__args__), f"数据集中光谱库类型有误为{type(data['D'])}"
         assert isinstance(data.get("L"), int) and data.get("L"), "数据集中端元数异常"
         assert isinstance(data.get("P"), int) and data.get("P"), "数据集中波段数异常"

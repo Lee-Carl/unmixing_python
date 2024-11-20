@@ -24,7 +24,7 @@ unmxingInfo = {
         "E": InitE_Enum.VCA,
         "A": InitA_Enum.SUnSAL,
         "D": None,
-        "show_initdata": None,
+        "show_initdata": False,
     },
     # 输出
     "output": {

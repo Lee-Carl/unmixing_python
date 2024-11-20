@@ -5,7 +5,6 @@ from custom_types import HsiDataset, HsiData, DatasetsEnum, InitA_Enum, InitE_En
 def extract_edm(y: HsiData, a:HsiData)-> HsiData: ...
 """
     提取端元
-main 144
     Args:
         y: 像元数据
         a: 预测的丰度数据

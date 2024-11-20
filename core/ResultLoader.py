@@ -1,19 +1,20 @@
 from core.consts import RESULTS_DIR
 from core import DataProcessor
 from custom_types import DatasetsEnum, MethodsEnum
-
+from typing import Union
 dp = DataProcessor()
 
 
 class ResultLoader:
-    def __init__(self, dataset: DatasetsEnum, method: MethodsEnum, idx: int = 0, path: str = ''):
+    def __init__(self, dataset: Union[DatasetsEnum,None]=None, method: Union[MethodsEnum,None]=None, idx: int = 1, path: str = ''):
         self.dataset = dataset
         self.method = method
         self.idx = idx
         self.path = path
+        self.data = self.get_Data()
 
     @staticmethod
-    def get_Data(abspath=None, datasetName=None, relpath=None):
+    def get_Data(dataset: DatasetsEnum, method: MethodsEnum, idx: int = 1, path: str = ''):
         if relpath:
             dtrue_name = [part for part in relpath.split("/") if part != ""]
             dtrue_name = dtrue_name[2]
