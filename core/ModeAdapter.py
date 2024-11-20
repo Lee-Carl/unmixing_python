@@ -59,7 +59,7 @@ class ModeAdapter:
         elif (not exist_flag) or replace:
             # 不存在，或要被替换，生成数据
             print("初始化数据: 正在生成初始化数据...")
-            savepos = f'{consts.INITDATA_DIR}/{case}/'
+            savepos = f'{consts.INITDATA_DIR}/{case.name}/'
             FileUtil.createdir(savepos)
             edmEnum: InitE_Enum = InitE_Enum(initE)
             abuEnum: InitA_Enum = InitA_Enum(initA)
@@ -114,11 +114,11 @@ class ModeAdapter:
             return results
 
     def draw(self, dataset, datapred, out_path=None):
-        draw_way = self.cfg.output.draw  # 获取配置文件上的指标计算方式
+        draw_way: str = self.cfg.output.draw  # 获取配置文件上的指标计算方式
         if draw_way:
-            draw_dir = out_path + '/assets'
-            FileUtil.createdir(draw_dir)
             try:
+                draw_dir = out_path + '/assets'
+                FileUtil.createdir(draw_dir)
                 draw_class = ml.get_Draw_Function(draw_way)  # 获取计算方式的类
                 draw_obj = draw_class(dataset, datapred, out_path)  # 定义对象
                 draw_obj()  # 获取计算结果

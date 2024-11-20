@@ -50,8 +50,9 @@ class Analyzer:
     def save(self):
         sio.savemat(self.savePath, self.data.__dict__)
 
-    def draw(self, func, args):
+    @staticmethod
+    def call_any_function(func, args):
         pass
 
-    def compute(self, func, args):
-        pass
+    def getDataset(self):
+        return self.dataset.copy()

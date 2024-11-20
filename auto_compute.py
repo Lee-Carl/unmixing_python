@@ -1,4 +1,5 @@
 import os
+from custom_types import HsiPropertyEnum
 from mode import AutoMode
 
 if __name__ == '__main__':
@@ -24,7 +25,13 @@ if __name__ == '__main__':
         "edm_name": {
             "Samson": ["Soil", "Tree", "Water"],
             "DeepGUn_ex4": ["EM #1", "EM #2", "EM #3", "EM #4", "EM #5"]
-        }
+        },
+        "metrics": [
+            {"SAD", HsiPropertyEnum.Y, draw, }
+        ],
+        "draw": [
+
+        ]
     }
 
     # 设置

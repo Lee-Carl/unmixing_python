@@ -6,7 +6,7 @@ import scipy.io as scio
 def loader():
     P, L, N = 3, 224, 4900
     H, W = 70, 70
-    data = scio.loadmat(f'{SIMULATED_DATASET_DIR}/20db/data_ex1.mat')
+    data = scio.loadmat(f'{SIMULATED_DATASET_DIR}/30db/data_ex1.mat')
     Y = data['r']
     Y = Y.astype(np.float32)
     M = data['M']

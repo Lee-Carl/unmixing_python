@@ -1,33 +1,26 @@
 import math
-
-import matplotlib.pyplot as plt
 import xlsxwriter as xw
 import shutil
 import os
-
-import scipy.io as sio
-import core.draw as draw
-from core.load import loadhsi
-from core.SmartMetrics import SmartMetrics
 from .metrics import AutoMetrics
 from .draw import AutoDraw
-import numpy as np
-from core.init import Norm
-from matplotlib.font_manager import FontProperties
-from matplotlib.colors import Normalize
+from custom_types import DatasetsEnum, MethodsEnum
 from utils import FileUtil
-from core import Analyzer
-from core import consts
+from core import Analyzer, consts
+from typing import List, Union, TypeVar, Generic, Any
 
 # note:对已经收录的方法进行的比较
 autometrics = AutoMetrics()  # 设置一套计算指标的方法
 autodraw = AutoDraw()
 ana = Analyzer()
-"""
-1. 复制结果到指定目录
-2. 读取结果
-3. 参与计算 / 画图 / 测试
-"""
+
+
+class AutoModeInfo:
+    def __init__(self, dataset: int, method: int, src: str, dst: str):
+        self.dataset = DatasetsEnum(dataset)
+        self.method = MethodsEnum(method)
+        self.src = src
+        self.dst = dst
 
 
 class AutoMode:
@@ -36,8 +29,10 @@ class AutoMode:
         self.dst = params['dst']
         self.draw = params['draw']
         self.xlsx = params['xlsx']
-        self.resPath = []
+        self.infos: List[List[AutoModeInfo]] = []
         self.ex = ex
+        self.baseDir = consts.RESULTS_DIR
+        self.results: List[List[Any]] = []
 
     def __call__(self):
         # 1. 复制结果到指定目录
@@ -46,80 +41,59 @@ class AutoMode:
         self.compute()
         self.draw()
 
-    # def copyToNewPath(self, src: str, dst: str):
-    #     for ds in os.listdir(src):  # 遍历res目录
-    #         dataset_dir = os.path.join(src, ds)  # 拼接成绝对地址
-    #         if os.path.isdir(dataset_dir):
-    #             for methods in os.listdir(dataset_dir):  # 遍历单一的数据集目录
-    #                 methods_dir = os.path.join(src, ds, methods)
-    #                 sub_dirs = []  # 收集方法目录下所有的目录文件
-    #                 for record in os.listdir(methods_dir):  # 遍历单一的方法目录
-    #                     record_dir = os.path.join(src, ds, methods, record)
-    #                     # 如果存在default目录，则直接将此目录视为目标目录，并直接终止此循环
-    #                     if record == 'default':
-    #                         sub_dirs.clear()
-    #                         sub_dirs.append(record_dir)
-    #                         break
-    #                     # 是目录；非空；不以params开头
-    #                     if os.path.isdir(record_dir) and \
-    #                             not FileUtil.is_directory_empty(record_dir) and \
-    #                             not record.startswith('params'):
-    #                         sub_dirs.append(record_dir)
-    #                 if sub_dirs:
-    #                     src_file = FileUtil.get_latest_directory(sub_dirs)  # 源目录绝对地址
-    #                     dst_file = src_file.replace(src, dst)  # 目标目录绝对地址
-    #
-    #                     shutil.copytree(src_file, dst_file)  # copytree会创建虚拟的目录树，从而能在目标目录不存在时完成复制
-
     def copyToNewPath(self, src: str, dst: str):
-        dataset_dir = src
-        for methods in os.listdir(dataset_dir):  # 遍历单一的数据集目录
-            methods_dir = os.path.join(src, ds, methods)
-            sub_dirs = []  # 收集方法目录下所有的目录文件
-            for record in os.listdir(methods_dir):  # 遍历单一的方法目录
-                record_dir = os.path.join(src, ds, methods, record)
-                # 如果存在default目录，则直接将此目录视为目标目录，并直接终止此循环
-                if record == 'default':
-                    sub_dirs.clear()
-                    sub_dirs.append(record_dir)
-                    break
-                # 是目录；非空；不以params开头
-                if os.path.isdir(record_dir) and \
-                        not FileUtil.is_directory_empty(record_dir) and \
-                        not record.startswith('params'):
-                    sub_dirs.append(record_dir)
-            if sub_dirs:
-                src_file = FileUtil.get_latest_directory(sub_dirs)  # 源目录绝对地址
-                dst_file = src_file.replace(src, dst)  # 目标目录绝对地址
+        self.infos = []
+        for i, ds in enumerate(self.ex["datasets"]):
+            collect: List[AutoModeInfo] = []
+            for method in self.ex["methods"]:
+                ''' 判断路径是否存在 '''
+                dir1: str = os.path.join(self.baseDir, ds, method)
+                if os.path.exists(dir1):
+                    raise ValueError(f"不存在名称为{dir1}的目录")
+                if not os.path.isdir(dir1):
+                    continue
+                records: List[str] = []
+                ''' 若存在，则遍历目录 '''
+                for record in os.listdir(dir1):
+                    dir2: str = os.path.join(dir1, record)
+                    ''' 如果存在default目录，则直接将此目录视为目标目录，并直接终止此循环 '''
+                    if record == 'default':
+                        records.clear()
+                        records.append(dir2)
+                        break
+                    ''' 是目录；非空；不以params开头 '''
+                    if os.path.isdir(dir2) and not FileUtil.is_directory_empty(dir2) and \
+                            not record.startswith(consts.RESULTS_PARAMS_DIR_PREFIX):
+                        records.append(dir2)
+                if records:
+                    src_file: str = FileUtil.get_latest_directory(records)  # 源目录绝对地址
+                    dst_file: str = src_file.replace(src, dst)  # 目标目录绝对地址
+                    collect.append(AutoModeInfo(method, ds, src_file, dst_file))
+                    shutil.copytree(src_file, dst_file)  # copytree会创建虚拟的目录树，从而能在目标目录不存在时完成复制
+            self.infos.append(collect)
 
-                shutil.copytree(src_file, dst_file)  # copytree会创建虚拟的目录树，从而能在目标目录不存在时完成复制
+    @staticmethod
+    def checkNan(data):
+        # 将Nan数据全部置0
+        if math.isnan(data):
+            data = 0
+        return data
 
-    def collect(self):
-        dsInfo = []
-        for case in self.ex["datasets"]:
-            pathInfo = []
-            for methods in self.ex["methods"]:
-                pathInfo = f'{consts.RESULTS_DIR}/{methods}/{case}/'
-
-    def computed(self):
+    def compute(self):
         # 录入excel做准备
-        cases = self.ex["datasets"]
-        methods = self.ex["methods"]
-        mp = []
-        for case in cases:
-            mp.append([case, "SAD", "E_aSAD", "RMSE", "A_aRMSE", "SAD_Y", "RMSE_Y", "aRMSE2"])
-            for _, model in enumerate(methods):
-                az = Analyzer()
+        self.results = []
+        for items in self.infos:
+            for item in items:
+                # todo: 待完善
+                self.results.append(
+                    [item.method.value, "SAD", "E_aSAD", "RMSE", "A_aRMSE", "SAD_Y", "RMSE_Y", "aRMSE2"])
+                az = Analyzer(dataset=item.dataset, method=item.method, path=item.dst)
+                data: Any = az.call_any_function(az.getDataset, az.getDataset())
+                data = self.checkNan(data)
+                self.results.append([])
+        self.save()
 
-                SAD, aSAD, rmse, aRMSE, SAD_Y, RMSE_Y, aRMSE2 = autometrics(case=case, file=file)
-                aSAD = self.checkNan(aSAD)
-                aRMSE = self.checkNan(aRMSE)
-                SAD_Y = self.checkNan(SAD_Y)
-                RMSE_Y = self.checkNan(RMSE_Y)
-                aRMSE2 = self.checkNan(aRMSE2)
-                mp.append([model, str(SAD), aSAD, str(rmse), aRMSE, SAD_Y, RMSE_Y, aRMSE2])
-            mp.append([])
-
+    def save(self):
         if self.xlsx:
             with xw.Workbook(f"{self.dst}/vs.xlsx") as workbook:  # 创建工作簿
                 worksheet1 = workbook.add_worksheet("对比数据")  # 创建子表
@@ -128,85 +102,19 @@ class AutoMode:
                 cell_format = workbook.add_format()
                 cell_format.set_align('center')
                 cell_format.set_align('vcenter')
-                for i, info in enumerate(mp):
+                for i, info in enumerate(self.results):
                     worksheet1.write_row('A' + str(i + 1), info, cell_format)
                 worksheet1.set_column('A:H', 15)
                 worksheet1.set_column('B:B', 70)
                 worksheet1.set_column('D:D', 70)
-
         print('*' * 100)
 
-    def plots_one(self, ex, types, show=False):
-        cases, models = ex['datasets'], ex['methods']
-        for case in cases:
-            # 生成保存地址
-            savepath = os.path.join(self.dst, self.draw, f'{case}')
-            # self.createdir(os.path.join(os.path.join(self.dst, '_draw')))
-            FileUtil.createdir(savepath)
-            # 导出真实数据
-            dtrue = loadhsi(case)
-            dtrue['Y'] = Norm.max_norm(dtrue['Y'])
-            am = SmartMetrics(dtrue)
-            P, L, N = am.dp.getPLN()
-            H, W = am.dp.getHW()
-            for model in models:
-                print(f'当前画的是：{model}--{case}')
-
-                # 导出预测数据
-                dpred = self.get_PredData(model=model, case=case)
-
-                for t in types:
-                    if t == "abu":
-                        apred = dpred['A']
-                        apred = am.dp.transpose(apred, (P, N))
-                        apred = apred.reshape((P, H, W))
-                        draw.abundanceMap(abu=apred, savepath=savepath, name=model, show=show)
-                    elif t == "edm":
-                        norm = Norm()
-                        x = norm.max_norm(dpred['E'])
-                        draw.vs_endmembers(dtrue['E'], x, name=model, savepath=savepath)
-                    elif t == "abu_diff":
-                        diff = np.fabs(dtrue["A"] - dpred['A'])
-                        diff = diff.reshape(P, H, W)
-                        draw.abundanceMap(abu=diff, savepath=savepath, name=model, show=show)
-
-    def plots_all(self, ex, types, show=False):
-        cases, models = ex['datasets'], ex['methods']
-        for case in cases:
-            # 生成保存地址
-            savepath = os.path.join(self.dst, self.draw, f'{case}')
-            # self.createdir(os.path.join(os.path.join(self.dst, '_draw')))
-            FileUtil.createdir(savepath)
-            # 导出真实数据
-            dtrue = loadhsi(case)
-            dtrue['Y'] = Norm.max_norm(dtrue['Y'])
-            am = SmartMetrics(dtrue)
-            P, L, N = am.dp.getPLN()
-            H, W = am.dp.getHW()
-            for model in models:
-                print(f'当前画的是：{model}--{case}')
-
-                # 导出预测数据
-                dpred = self.get_PredData(model=model, case=case)
-
-                for t in types:
-                    if t == "abu":
-                        apred = dpred['A']
-                        apred = am.dp.transpose(apred, (P, N))
-                        apred = apred.reshape((P, H, W))
-                        draw.abundanceMap_all(abu=apred, savepath=savepath, show=show, name=model)
-                    elif t == "edm":
-                        norm = Norm()
-                        x = norm.max_norm(dpred['E'])
-                        draw.vs_endmembers_all(dtrue['E'], x, name=model, savepath=savepath)
-                    elif t == "abu_diff":
-                        diff = np.fabs(dtrue["A"] - dpred['A'])
-                        diff = diff.reshape(P, H, W)
-                        draw.abundanceMap_all(abu=diff, savepath=savepath, show=show, name=model)
-
-    @staticmethod
-    def checkNan(data):
-        # 将Nan数据全部置0
-        if math.isnan(data):
-            data = 0
-        return data
+    def plot(self):
+        # 录入excel做准备
+        for items in self.infos:
+            for item in items:
+                # todo: 待完善
+                az = Analyzer(dataset=item.dataset, method=item.method, path=item.dst)
+                data: Any = az.call_any_function(az.getDataset, az.getDataset())
+                data = self.checkNan(data)
+                self.results.append([])

@@ -17,7 +17,7 @@ class MainConfig_Init:
 
 class MainConfig_Output:
     def __init__(self, **kwargs):
-        self.draw: bool = kwargs.get('draw', False)
+        self.draw: str = kwargs.get('draw', False)
         self.normalization: bool = kwargs.get('normalization', False)
         self.sort: bool = kwargs.get('sort', False)
         self.metrics: NoneableString = kwargs.get('metrics', None)

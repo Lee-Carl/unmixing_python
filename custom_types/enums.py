@@ -28,8 +28,8 @@ class DatasetsEnum(IntBaseEnum):
     Urban5 = auto()
     Urban6 = auto()
     # 模拟数据集
-    DeepGun_ex2 = auto()
-    DeepGun_ex4 = auto()
+    DeepGUn_ex2 = auto()
+    DeepGUn_ex4 = auto()
     SUnCNN_DC1 = auto()
     SUnCNN_DC2 = auto()
 

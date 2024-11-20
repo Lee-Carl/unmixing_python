@@ -13,7 +13,8 @@ def loadhsi(case: str) -> HsiDataset:
 
     if case in config_data.keys():
         # 如果存在相应的数据集, 那么导入
-        d = ImportUtil.loadModule(config_data[case])
+        ds = config_data[case]
+        d = ImportUtil.loadModule(ds)
         return HsiDataset(**d())
     else:
         # 不存在相应的数据集, 就报错

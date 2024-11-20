@@ -4,6 +4,7 @@ import numpy as np
 from matplotlib.font_manager import FontProperties
 from matplotlib.colors import Normalize
 
+
 def plots_onepic_abu(ex, show=False, todiff=False, t=False):
     cases, models, names = ex['datasets'], ex['methods'], ex['edm_name']
     plt.rcParams['xtick.direction'] = 'in'

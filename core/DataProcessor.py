@@ -64,7 +64,7 @@ class DataProcessor:
         elif initA == InitA_Enum.SUnSAL:
             data = InitAbu.SUnSAL(Y_init, E_init)[0]
         else:
-            raise ValueError("initA:Unknown Methods")
+            raise ValueError("initA: Unknown Methods")
         return data
 
     @staticmethod
