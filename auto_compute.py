@@ -1,5 +1,5 @@
 import os
-from mode import Auto
+from mode import AutoMode
 
 if __name__ == '__main__':
     """
@@ -8,18 +8,8 @@ if __name__ == '__main__':
     画一个模型的图：plots(case, model)
     画多个模型的图：plots_all(cases, models)
     """
-    # 0: "Samson",
-    # 1: "JasperRidge",
-    # 2: "DeepGUn_ex2",
-    # 3: "DeepGUn_ex4",
-    # 4: "SUnCNN_DC1",
-    # 5: "SUnCNN_DC2",
-    # 6: "Urban4",
-    # 7: "Urban5",
-    # 8: "Urban6"
 
     ex1 = {
-        # "datasets": ["DeepGUn_ex2", "JasperRidge"],
         "datasets": ["JasperRidge"],
         "methods": ["ELMM", "GLMM", "PLMM", "MESMA", "DeepGUn", "PGMSU", "DGASU"],
         "edm_name": {
@@ -30,7 +20,6 @@ if __name__ == '__main__':
 
     ex2 = {
         "datasets": ["DeepGUn_ex4", "Samson"],
-        # "datasets": ["DeepGUn_ex4"],
         "methods": ["FCLSU", "ALMM", "CNNAEU", "DAEU", "EndNet", "CyCU", "DCAE"],
         "edm_name": {
             "Samson": ["Soil", "Tree", "Water"],
@@ -40,14 +29,13 @@ if __name__ == '__main__':
 
     # 设置
     params = {
-        'obj_file': 'results.mat',  # 解析的文件，需要包含统一的丰度名称、端元名称
         'src': '../res',
         'dst': '../../_exp/ex2',
         'draw': '_abus1',  # 相对于dst目录下
         'xlsx': False,  # True:将数据打印成xlsx文件
     }
 
-    acp = Auto(params)  # 初始化
+    acp = AutoMode(params, ex)  # 初始化
 
     # if not os.path.exists(os.path.join(os.getcwd(), acp.dst)):
     #     # 如果dst目录不存在，就收集最新的目录信息

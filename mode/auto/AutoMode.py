@@ -17,36 +17,100 @@ from matplotlib.font_manager import FontProperties
 from matplotlib.colors import Normalize
 from utils import FileUtil
 from core import Analyzer
+from core import consts
 
 # note:对已经收录的方法进行的比较
 autometrics = AutoMetrics()  # 设置一套计算指标的方法
 autodraw = AutoDraw()
 ana = Analyzer()
+"""
+1. 复制结果到指定目录
+2. 读取结果
+3. 参与计算 / 画图 / 测试
+"""
 
 
 class AutoMode:
-    def __init__(self, params):
-        self.obj_file = params['obj_file']
+    def __init__(self, params: dict, ex: dict):
         self.src = params['src']
         self.dst = params['dst']
         self.draw = params['draw']
         self.xlsx = params['xlsx']
+        self.resPath = []
+        self.ex = ex
 
-    def get_PredData(self, model, case):
-        dst = self.dst
-        pred_dir = os.path.join(dst, model, case)
-        latest_dir = FileUtil.get_latest_directory(FileUtil.get_subdirectories(pred_dir))
-        results_file = os.path.join(latest_dir, self.obj_file)
-        data_pred = sio.loadmat(results_file)
-        return data_pred
+    def __call__(self):
+        # 1. 复制结果到指定目录
+        self.copyToNewPath(self.src, self.dst)
+        # 2. 自动计算与画图
+        self.compute()
+        self.draw()
 
-    def computed_all(self, ex):
-        cases, models = ex['datasets'], ex['methods']
+    # def copyToNewPath(self, src: str, dst: str):
+    #     for ds in os.listdir(src):  # 遍历res目录
+    #         dataset_dir = os.path.join(src, ds)  # 拼接成绝对地址
+    #         if os.path.isdir(dataset_dir):
+    #             for methods in os.listdir(dataset_dir):  # 遍历单一的数据集目录
+    #                 methods_dir = os.path.join(src, ds, methods)
+    #                 sub_dirs = []  # 收集方法目录下所有的目录文件
+    #                 for record in os.listdir(methods_dir):  # 遍历单一的方法目录
+    #                     record_dir = os.path.join(src, ds, methods, record)
+    #                     # 如果存在default目录，则直接将此目录视为目标目录，并直接终止此循环
+    #                     if record == 'default':
+    #                         sub_dirs.clear()
+    #                         sub_dirs.append(record_dir)
+    #                         break
+    #                     # 是目录；非空；不以params开头
+    #                     if os.path.isdir(record_dir) and \
+    #                             not FileUtil.is_directory_empty(record_dir) and \
+    #                             not record.startswith('params'):
+    #                         sub_dirs.append(record_dir)
+    #                 if sub_dirs:
+    #                     src_file = FileUtil.get_latest_directory(sub_dirs)  # 源目录绝对地址
+    #                     dst_file = src_file.replace(src, dst)  # 目标目录绝对地址
+    #
+    #                     shutil.copytree(src_file, dst_file)  # copytree会创建虚拟的目录树，从而能在目标目录不存在时完成复制
+
+    def copyToNewPath(self, src: str, dst: str):
+        dataset_dir = src
+        for methods in os.listdir(dataset_dir):  # 遍历单一的数据集目录
+            methods_dir = os.path.join(src, ds, methods)
+            sub_dirs = []  # 收集方法目录下所有的目录文件
+            for record in os.listdir(methods_dir):  # 遍历单一的方法目录
+                record_dir = os.path.join(src, ds, methods, record)
+                # 如果存在default目录，则直接将此目录视为目标目录，并直接终止此循环
+                if record == 'default':
+                    sub_dirs.clear()
+                    sub_dirs.append(record_dir)
+                    break
+                # 是目录；非空；不以params开头
+                if os.path.isdir(record_dir) and \
+                        not FileUtil.is_directory_empty(record_dir) and \
+                        not record.startswith('params'):
+                    sub_dirs.append(record_dir)
+            if sub_dirs:
+                src_file = FileUtil.get_latest_directory(sub_dirs)  # 源目录绝对地址
+                dst_file = src_file.replace(src, dst)  # 目标目录绝对地址
+
+                shutil.copytree(src_file, dst_file)  # copytree会创建虚拟的目录树，从而能在目标目录不存在时完成复制
+
+    def collect(self):
+        dsInfo = []
+        for case in self.ex["datasets"]:
+            pathInfo = []
+            for methods in self.ex["methods"]:
+                pathInfo = f'{consts.RESULTS_DIR}/{methods}/{case}/'
+
+    def computed(self):
         # 录入excel做准备
+        cases = self.ex["datasets"]
+        methods = self.ex["methods"]
         mp = []
         for case in cases:
             mp.append([case, "SAD", "E_aSAD", "RMSE", "A_aRMSE", "SAD_Y", "RMSE_Y", "aRMSE2"])
-            for id, model in enumerate(models):
+            for _, model in enumerate(methods):
+                az = Analyzer()
+
                 SAD, aSAD, rmse, aRMSE, SAD_Y, RMSE_Y, aRMSE2 = autometrics(case=case, file=file)
                 aSAD = self.checkNan(aSAD)
                 aRMSE = self.checkNan(aRMSE)
@@ -146,35 +210,3 @@ class AutoMode:
         if math.isnan(data):
             data = 0
         return data
-
-    def get_PredDataDir(self, model, case):
-        pred_dir = os.path.join(self.dst, model, case)
-        latest_dir = FileUtil.get_latest_directory(FileUtil.get_subdirectories(pred_dir))
-        results_file = os.path.join(latest_dir, self.obj_file)
-        return results_file
-
-    def getLatestDirInfo(self):
-        src = self.src
-        dst = self.dst
-        for ds in os.listdir(src):  # 遍历res目录
-            dataset_dir = os.path.join(src, ds)  # 拼接成绝对地址
-            if os.path.isdir(dataset_dir):
-                for methods in os.listdir(dataset_dir):  # 遍历单一的数据集目录
-                    methods_dir = os.path.join(src, ds, methods)
-                    sub_dirs = []  # 收集方法目录下所有的目录文件
-                    for record in os.listdir(methods_dir):  # 遍历单一的方法目录
-                        record_dir = os.path.join(src, ds, methods, record)
-                        # 如果存在default目录，则直接将此目录视为目标目录，并直接终止此循环
-                        if record == 'default':
-                            sub_dirs.clear()
-                            sub_dirs.append(record_dir)
-                            break
-                        # 是目录；非空；不以params开头
-                        if os.path.isdir(record_dir) and \
-                                not FileUtil.is_directory_empty(record_dir) and \
-                                not record.startswith('params'):
-                            sub_dirs.append(record_dir)
-                    if sub_dirs:
-                        src_file = FileUtil.get_latest_directory(sub_dirs)  # 源目录绝对地址
-                        dst_file = src_file.replace(src, dst)  # 目标目录绝对地址
-                        shutil.copytree(src_file, dst_file)  # copytree会创建虚拟的目录树，从而能在目标目录不存在时完成复制

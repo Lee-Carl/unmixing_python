@@ -1,7 +1,11 @@
+import matplotlib.pyplot as plt
+from core.load import loadhsi
+import numpy as np
+from matplotlib.font_manager import FontProperties
+from matplotlib.colors import Normalize
+from ..init import Norm
 
-
-
-def plots_onepic_edm(self, ex, show=False):
+def plots_onepic_edm(ex, show=False):
     cases, models, names = ex['datasets'], ex['methods'], ex['edm_name']
     plt.rcParams['xtick.direction'] = 'in'
     plt.rcParams['ytick.direction'] = 'in'

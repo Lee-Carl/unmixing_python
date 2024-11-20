@@ -1,1 +1,1 @@
-from .Auto import Auto
+from .AutoMode import Auto

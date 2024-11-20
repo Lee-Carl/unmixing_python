@@ -116,7 +116,7 @@ class DataProcessor:
     @staticmethod
     def sort_edm_and_abu(dtrue: HsiDataset, dpred: HsiDataset, case: int = 2,
                          repeat: bool = False, edm_repeat: bool = False,
-                         abu_repeat: bool = False, tip: bool = False):
+                         abu_repeat: bool = False, tip: bool = False)->HsiDataset:
         return hsiSort.sort_Edm_And_Abu(dtrue, dpred, case, repeat,
                                         edm_repeat, abu_repeat, tip)
 
