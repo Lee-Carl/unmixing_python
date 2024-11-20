@@ -9,7 +9,7 @@ from utils import FileUtil
 dp = DataProcessor()
 
 
-class ResultLoader:
+class Analyzer:
 
     def __init__(self,
                  dataset: Union[DatasetsEnum, None] = None,
@@ -20,12 +20,13 @@ class ResultLoader:
         self.method = method
         self.idx = idx
         self.path = path
-        self.data = self.get_ResultData(dataset=dataset, method=method, mode=mode, idx=idx, path=path)
+        self.savePath = self.get_SavePath(dataset=dataset, method=method, mode=mode, idx=idx, path=path)
+        self.data = self.get_ResultData(self.savePath)
         self.dataset = dp.loadDatast(dataset)
 
     @staticmethod
-    def get_ResultData(dataset: DatasetsEnum, method: MethodsEnum, mode: ModeEnum, idx: int = 1,
-                       path: str = '') -> HsiDataset:
+    def get_SavePath(dataset: DatasetsEnum, method: MethodsEnum, mode: ModeEnum, idx: int = 1,
+                     path: str = '') -> str:
         filepath: str = ''
         if path:
             filepath = f'{path}/{consts.RESULTS_FILE}'
@@ -35,5 +36,22 @@ class ResultLoader:
         if len(filepath) == 0:
             raise ValueError("请检查传递的参数")
         absPath: str = FileUtil.getAbsPath_ByRelativepath(filepath)
-        data: dict = sio.loadmat(absPath)
+        return absPath
+
+    @staticmethod
+    def get_ResultData(savePath: str) -> HsiDataset:
+        data: dict = sio.loadmat(savePath)
         return HsiDataset(**data)
+
+    def sort(self) -> None:
+        # 作用: 对所有计算结果进行排序
+        self.data = dp.sort_edm_and_abu(dtrue=self.dataset, dpred=self.data, case=1, repeat=False)
+
+    def save(self):
+        sio.savemat(self.savePath, self.data.__dict__)
+
+    def draw(self, func, args):
+        pass
+
+    def compute(self, func, args):
+        pass
