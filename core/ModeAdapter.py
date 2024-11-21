@@ -1,7 +1,7 @@
 from .load import ModuleLoader
 from custom_types import MainCfg, HsiDataset, InitE_Enum, InitA_Enum
 from core import consts
-from utils import FileUtil
+from utils import FileUtil, HsiUtil
 from .DataProcessor import DataProcessor
 import os
 import copy
@@ -89,9 +89,10 @@ class ModeAdapter:
     def run(method, params: dict, init: HsiDataset, savepath=None, output_display=True) -> HsiDataset:
         model = method(params=params, init=copy.deepcopy(init))
         data_pred: dict = model.run(savepath=savepath, output_display=output_display)
-        dic: dict = init.__dict__.copy()
+        dic: dict = init.__dict__.copy() # tod
         dic.update(data_pred)
-        return HsiDataset(**dic)
+        data = HsiDataset(**dic)
+        return HsiUtil.checkHsiDatasetDims(data)
 
     def get_Params_adjust(self):
         around = self.cfg.params.around
@@ -100,7 +101,7 @@ class ModeAdapter:
 
     @staticmethod
     def sort_EndmembersAndAbundances(dataset: HsiDataset, datapred: HsiDataset) -> HsiDataset:
-        datapred = dp.sort_edm_and_abu(dtrue=dataset, dpred=datapred, edm_repeat=True, case=2)
+        datapred = dp.sort_edm_and_abu(dtrue=dataset, dpred=datapred, case=2, edm_repeat=True, abu_repeat=True)
         return datapred
 
     def compute(self, dataset, datapred, out_path=None):

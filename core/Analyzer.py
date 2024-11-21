@@ -21,7 +21,7 @@ class Analyzer:
         self.idx = idx
         self.path = path
         self.savePath = self.get_SavePath(dataset=dataset, method=method, mode=mode, idx=idx, path=path)
-        self.data = self.get_ResultData(self.savePath)
+        self.data = self.__get_ResultData(self.savePath)
         self.dataset = dp.loadDatast(dataset)
 
     @staticmethod
@@ -39,13 +39,13 @@ class Analyzer:
         return absPath
 
     @staticmethod
-    def get_ResultData(savePath: str) -> HsiDataset:
+    def __get_ResultData(savePath: str) -> HsiDataset:
         data: dict = sio.loadmat(savePath)
         return HsiDataset(**data)
 
     def sort(self) -> None:
         # 作用: 对所有计算结果进行排序
-        self.data = dp.sort_edm_and_abu(dtrue=self.dataset, dpred=self.data, case=1, repeat=False)
+        self.data = dp.sort_edm_and_abu(dtrue=self.dataset, dpred=self.data, case=1)
 
     def save(self):
         sio.savemat(self.savePath, self.data.__dict__)
@@ -79,3 +79,6 @@ class Analyzer:
             return data.reshape(P, H, W)
         else:
             return data
+
+    def get_endmembers(self):
+        return self.data.edm.copy()

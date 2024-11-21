@@ -18,32 +18,28 @@ def mean(x, y):
     return np.mean((x - y) ** 2)
 
 
-def sort_Edm_And_Abu(dtrue: HsiDataset, dpred: HsiDataset, case: int = 2, repeat: bool = False,
+def sort_Edm_And_Abu(dtrue: HsiDataset, dpred: HsiDataset, case: int = 2,
                      edm_repeat: bool = False, abu_repeat: bool = False,
                      tip: bool = False):
     P, L, N = dtrue.getPLN()
-
-    d_true = dtrue.E
-    d_pred = dpred.E
-
-    if len(d_true.shape) == 3:
-        d_true = HsiUtil.changeDims(d_true, (L, P, N))
+    if len(dtrue.edm.shape) == 3:
+        dtrue.edm = HsiUtil.changeDims(dtrue.edm, (L, P, N))
     else:
-        d_true = HsiUtil.changeDims(d_true, (L, P))
+        dtrue.edm = HsiUtil.changeDims(dtrue.edm, (L, P))
 
-    if len(d_pred.shape) == 3:
-        d_pred = HsiUtil.changeDims(d_pred, (L, P, N))
+    if len(dpred.edm.shape) == 3:
+        dpred.edm = HsiUtil.changeDims(dpred.edm, (L, P, N))
     else:
-        d_pred = HsiUtil.changeDims(d_pred, (L, P))
+        dpred.edm = HsiUtil.changeDims(dpred.edm, (L, P))
 
     if case == 1:
         # 依赖于sortForEndmember
-        dpred.E, dim = sort_edm(d_true, d_pred, P, repeat=repeat)
-        dpred.A = HsiUtil.changeDims(dpred.A, (P, N))
-        dpred.A = np.take(dpred.A, dim, axis=0)
+        dpred.edm, dim = sort_edm(dtrue.edm, dpred.edm, P, repeat=edm_repeat)
+        dpred.abu = HsiUtil.changeDims(dpred.abu, (P, N))
+        dpred.abu = np.take(dpred.abu, dim, axis=0)
     else:
-        dpred.E, _ = sort_edm(d_true, d_pred, P, repeat=edm_repeat or repeat)
-        dpred.A, _ = sort_abu(dtrue.A, dpred.A.T, P, repeat=abu_repeat or repeat)
+        dpred.E, _ = sort_edm(dtrue.edm, dpred.edm, P, repeat=edm_repeat)
+        dpred.A, _ = sort_abu(dtrue.abu, dpred.abu, P, repeat=abu_repeat)
 
     return dpred
 

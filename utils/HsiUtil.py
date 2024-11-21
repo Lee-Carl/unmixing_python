@@ -41,11 +41,8 @@ class HsiUtil:
     @staticmethod
     def changeDims(data: HsiData, shape: tuple) -> HsiData:
         if data.shape != shape:
-            if len(data.shape) == 2:
-                data = data.T
-            else:
-                dims = tuple(data.shape.index(e) for e in shape)  # 获取目标shape在data的shape中的次序
-                data = data.transpose(dims)  # 转置成目标shape
+            dims = tuple(data.shape.index(e) for e in shape)  # 获取目标shape在data的shape中的次序
+            data = data.transpose(dims)  # 转置成目标shape
         return data
 
     @staticmethod

@@ -1,16 +1,14 @@
 import matplotlib.pyplot as plt
-from matplotlib.pyplot import imshow
 
 from core.load import loadhsi
 from core import Analyzer
-import numpy as np
 from matplotlib.font_manager import FontProperties
 from matplotlib.colors import Normalize
 from typing import List
-from custom_types import ExInfo, DatasetsEnum, HsiDataset
+from custom_types import DatasetsEnum, HsiDataset
 
 
-def one_pic_abu(ds: DatasetsEnum, items: List[Analyzer], names: List[str], show: bool = False, todiff: bool = False,
+def one_pic_abu(ds: DatasetsEnum, items: List[Analyzer], nameList: List[str], show: bool = False, todiff: bool = False,
                 t: bool = False, withGT: bool = False):
     plt.rcParams['xtick.direction'] = 'in'
     plt.rcParams['ytick.direction'] = 'in'
@@ -18,7 +16,7 @@ def one_pic_abu(ds: DatasetsEnum, items: List[Analyzer], names: List[str], show:
     font_prop = FontProperties(family='Times New Roman', style='normal', weight='bold', size=14)  # 加粗
 
     dataset: HsiDataset = loadhsi(ds.name)
-    P: int = dataset.bandNum
+    P: int = dataset.edmNum
     methodNums: int = len(items)
     if withGT:
         methodNums += 1
@@ -31,12 +29,12 @@ def one_pic_abu(ds: DatasetsEnum, items: List[Analyzer], names: List[str], show:
         for j in range(0, P):
             # 方法名称
             if j == 0:
-                axs[j, i].title.set_text(m)  # 给左上角的子图添加标题
+                axs[j, i].title.set_text(item.method.name)  # 给左上角的子图添加标题
                 axs[j, i].title.set_fontproperties(font_prop)
             # 端元名称
             if i == 0:
-                if nlist:
-                    axs[j, 0].set_ylabel(nlist[j]).set_fontproperties(font_prop)
+                if nameList:
+                    axs[j, 0].set_ylabel(nameList[j]).set_fontproperties(font_prop)
 
             # plt.subplot(P, methodNums, i + methodNums * j)
             norm = Normalize(vmin=0, vmax=0.4)  # 这里的vmin和vmax根据您的数据自行设置

@@ -4,9 +4,11 @@ import shutil
 import os
 from .metrics import AutoMetrics
 from .draw import AutoDraw
+
 from custom_types import DatasetsEnum, MethodsEnum, ExInfo
 from utils import FileUtil
 from core import Analyzer, consts
+from core.draw import one_pic
 from typing import List, Any
 
 # note:对已经收录的方法进行的比较
@@ -60,7 +62,7 @@ class AutoMode:
                 if records:
                     src_file: str = FileUtil.get_latest_directory(records)  # 源目录绝对地址
                     dst_file: str = src_file.replace(src, dst)  # 目标目录绝对地址
-                    collect.append(ExInfo(method, ds, src_file, dst_file))
+                    collect.append(ExInfo(ds, method, src_file, dst_file))
                     shutil.copytree(src_file, dst_file)  # copytree会创建虚拟的目录树，从而能在目标目录不存在时完成复制
             self.infos.append(collect)
 
@@ -116,9 +118,4 @@ class AutoMode:
     def draw_onePic(self):
         # 录入excel做准备
         for items in self.infos:
-            for item in items:
-                # todo: 待完善
-                az = Analyzer(dataset=item.dataset, method=item.method, path=item.dst)
-                data: Any = az.call_any_function(az.getDataset, az.getDataset())
-                data = self.checkNan(data)
-                self.results.append([])
+            one_pic.one_pic_edm(ds=self.ex['dataset'], items=items, nameList=self.ex["edm"])
