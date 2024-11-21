@@ -3,7 +3,7 @@ from core.load import loadhsi
 import numpy as np
 from matplotlib.font_manager import FontProperties
 from matplotlib.colors import Normalize
-from ..init import Norm
+from core.init import Norm
 
 
 def plots_onepic_edm(ex, show=False):

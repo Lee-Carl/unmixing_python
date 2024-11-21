@@ -3,10 +3,11 @@ from core.load import loadhsi
 import numpy as np
 from matplotlib.font_manager import FontProperties
 from matplotlib.colors import Normalize
+from typing import List
 
 
-def plots_onepic_abu(ex, show=False, todiff=False, t=False):
-    cases, models, names = ex['datasets'], ex['methods'], ex['edm_name']
+
+def plots_onepic_abu(ex:List, show=False, todiff=False, t=False):
     plt.rcParams['xtick.direction'] = 'in'
     plt.rcParams['ytick.direction'] = 'in'
     plt.rcParams['font.family'] = 'Times New Roman'  # 字体
