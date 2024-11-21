@@ -37,10 +37,3 @@ def int_to_enum(value, enum_class):
     raise ValueError(f"{value} is not a valid enum value for {enum_class.__name__}")
 
 
-etype: TypeAlias = Union[int, float]
-print(get_args(etype))
-a = 1
-print(isinstance(a, get_args(etype)))
-
-b = '1'
-print(isinstance(b, get_args(etype)))

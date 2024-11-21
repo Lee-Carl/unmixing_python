@@ -4,23 +4,15 @@ import shutil
 import os
 from .metrics import AutoMetrics
 from .draw import AutoDraw
-from custom_types import DatasetsEnum, MethodsEnum
+from custom_types import DatasetsEnum, MethodsEnum, ExInfo
 from utils import FileUtil
 from core import Analyzer, consts
-from typing import List, Union, TypeVar, Generic, Any
+from typing import List, Any
 
 # note:对已经收录的方法进行的比较
 autometrics = AutoMetrics()  # 设置一套计算指标的方法
 autodraw = AutoDraw()
 ana = Analyzer()
-
-
-class AutoModeInfo:
-    def __init__(self, dataset: int, method: int, src: str, dst: str):
-        self.dataset = DatasetsEnum(dataset)
-        self.method = MethodsEnum(method)
-        self.src = src
-        self.dst = dst
 
 
 class AutoMode:
@@ -29,7 +21,7 @@ class AutoMode:
         self.dst = params['dst']
         self.draw = params['draw']
         self.xlsx = params['xlsx']
-        self.infos: List[List[AutoModeInfo]] = []
+        self.infos: List[List[ExInfo]] = []
         self.ex = ex
         self.baseDir = consts.RESULTS_DIR
         self.results: List[List[Any]] = []
@@ -44,7 +36,7 @@ class AutoMode:
     def copyToNewPath(self, src: str, dst: str):
         self.infos = []
         for i, ds in enumerate(self.ex["datasets"]):
-            collect: List[AutoModeInfo] = []
+            collect: List[ExInfo] = []
             for method in self.ex["methods"]:
                 ''' 判断路径是否存在 '''
                 dir1: str = os.path.join(self.baseDir, ds, method)
@@ -68,7 +60,7 @@ class AutoMode:
                 if records:
                     src_file: str = FileUtil.get_latest_directory(records)  # 源目录绝对地址
                     dst_file: str = src_file.replace(src, dst)  # 目标目录绝对地址
-                    collect.append(AutoModeInfo(method, ds, src_file, dst_file))
+                    collect.append(ExInfo(method, ds, src_file, dst_file))
                     shutil.copytree(src_file, dst_file)  # copytree会创建虚拟的目录树，从而能在目标目录不存在时完成复制
             self.infos.append(collect)
 
@@ -82,15 +74,17 @@ class AutoMode:
     def compute(self):
         # 录入excel做准备
         self.results = []
-        for items in self.infos:
+        for i, items in enumerate(self.infos):
             for item in items:
-                # todo: 待完善
-                self.results.append(
-                    [item.method.value, "SAD", "E_aSAD", "RMSE", "A_aRMSE", "SAD_Y", "RMSE_Y", "aRMSE2"])
-                az = Analyzer(dataset=item.dataset, method=item.method, path=item.dst)
-                data: Any = az.call_any_function(az.getDataset, az.getDataset())
-                data = self.checkNan(data)
-                self.results.append([])
+                self.results.append([item.method.value])
+                for c in self.ex["metrics"]:
+                    self.results.append(c[0])
+                    # todo: 待完善
+                    az = Analyzer(dataset=item.dataset, method=item.method, path=item.dst)
+                    data: Any = az.call_any_function(c[2], az.getKey(c[1]))
+                    data = self.checkNan(data)
+                    self.results[i].append(data)
+        ''' 打印结果 '''
         self.save()
 
     def save(self):
@@ -109,7 +103,17 @@ class AutoMode:
                 worksheet1.set_column('D:D', 70)
         print('*' * 100)
 
-    def plot(self):
+    def draw(self):
+        # 录入excel做准备
+        for items in self.infos:
+            for item in items:
+                # todo: 待完善
+                az = Analyzer(dataset=item.dataset, method=item.method, path=item.dst)
+                data: Any = az.call_any_function(az.getDataset, az.getDataset())
+                data = self.checkNan(data)
+                self.results.append([])
+
+    def draw_onePic(self):
         # 录入excel做准备
         for items in self.infos:
             for item in items:

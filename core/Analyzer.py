@@ -3,7 +3,7 @@ from core import DataProcessor, consts
 from custom_types import DatasetsEnum, MethodsEnum, HsiDataset, ModeEnum
 from typing import Union
 import scipy.io as sio
-
+import numpy as np
 from utils import FileUtil
 
 dp = DataProcessor()
@@ -56,3 +56,26 @@ class Analyzer:
 
     def getDataset(self):
         return self.dataset.copy()
+
+    def getKey(self, key: str):
+        return self.dataset[key], self.data[key]
+
+    def get_differenceMap(self, shapePHW: bool = False):
+        data = np.fabs(self.dataset.abu - self.data.abu)
+        if shapePHW:
+            P: int = self.dataset.P
+            H: int = self.dataset.H
+            W: int = self.dataset.W
+            return data.reshape(P, H, W)
+        else:
+            return data
+
+    def get_abundanceMap(self, shapePHW: bool = False):
+        data = self.dataset.abu.copy()
+        if shapePHW:
+            P: int = self.dataset.P
+            H: int = self.dataset.H
+            W: int = self.dataset.W
+            return data.reshape(P, H, W)
+        else:
+            return data

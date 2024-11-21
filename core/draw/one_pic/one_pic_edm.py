@@ -6,7 +6,7 @@ from matplotlib.colors import Normalize
 from core.init import Norm
 
 
-def plots_onepic_edm(ex, show=False):
+def one_pic_edm(ex, show=False):
     cases, models, names = ex['datasets'], ex['methods'], ex['edm_name']
     plt.rcParams['xtick.direction'] = 'in'
     plt.rcParams['ytick.direction'] = 'in'

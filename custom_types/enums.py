@@ -77,7 +77,7 @@ class HsiPropertyEnum(IntBaseEnum):
 class ModeEnum(IntBaseEnum):
     Run = 1
     Param = 2
-    Test = 3
+    Auto = 3
 
 
 @unique

@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 
-def abundanceMap(abu, name="abundaceMap", filetype="tif", savepath=None, show=False):
+def abundanceMap(abu, name: str = "abundaceMap", filetype: str = "tif", savepath: str = None, show: bool = False):
     # note:画丰度图
     # abu-(L,H,W)
     P, H, W = abu.shape
