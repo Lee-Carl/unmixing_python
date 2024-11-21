@@ -1,6 +1,7 @@
 import os
 from custom_types import HsiPropertyEnum
-from mode import AutoMode
+from mode.auto import AutoMode
+from core import draw
 
 if __name__ == '__main__':
     """
@@ -27,7 +28,7 @@ if __name__ == '__main__':
             "DeepGUn_ex4": ["EM #1", "EM #2", "EM #3", "EM #4", "EM #5"]
         },
         "metrics": [
-            {"SAD", HsiPropertyEnum.Y, draw, }
+            {"SAD", HsiPropertyEnum.Y, draw.}
         ],
         "draw": [
 
