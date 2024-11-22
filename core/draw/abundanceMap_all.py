@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def abundanceMap_all(abu, name="abundanceMap", title="abundanceMap", show=False,savepath=None):
+def abundanceMap_all(abu, name="abundanceMap", title="abundanceMap", show=True,savepath=None):
     # note:画丰度图
     # abu-(P,H,W)
     P, H, W = abu.shape

@@ -8,7 +8,7 @@ around = around2
 
 unmxingInfo = {
     # 数据集
-    "dataset": DatasetsEnum.DeepGUn_ex4,
+    "dataset": DatasetsEnum.Urban4,
     # 方法
     "method": MethodsEnum.PGMSU,
     # 模式

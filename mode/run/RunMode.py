@@ -4,7 +4,7 @@ from .draw import Draw
 from .metrics import Metrics
 import os
 import scipy.io as sio
-from datetime import datetime
+from utils import TimeUtil
 import time
 
 
@@ -14,11 +14,6 @@ class RunMode:
         self.metrics = Metrics  # 直接赋值类名即可，但写法参考Metrics
         self.cp = ModeAdapter(cfg)
         self.log = MyLog(cfg)
-
-    @staticmethod
-    def __get_current_date_and_time():
-        start_time = datetime.now()
-        return start_time.strftime("%Y-%m-%d %H:%M:%S")
 
     @staticmethod
     def __get_runtime(st, ed):
@@ -39,7 +34,7 @@ class RunMode:
 
     def run(self):
         st = time.time()
-        start_time = self.__get_current_date_and_time()
+        start_time = TimeUtil.getCurrentTime()
         self.cp.set_seed()
         dataset = self.cp.get_Dataset()
         initData = self.cp.get_InitData(dataset, replace=False)
@@ -54,7 +49,7 @@ class RunMode:
         # sort_EndmembersAndAbundances(dtrue=dataset, dpred=datapred, edm_repeat=True, case=2)
         sio.savemat(outdir + "results.mat", data_pred.__dict__)
         ed = time.time()
-        end_time = self.__get_current_date_and_time()
+        end_time = TimeUtil.getCurrentTime()
         total_time = self.__get_runtime(st, ed)
         print('*' * 60 + '  Execution Time!  ' + '*' * 60)
         print(f'起始时间: {start_time}')

@@ -3,10 +3,17 @@ from enum import unique, IntEnum, auto
 
 class IntBaseEnum(IntEnum):
     @classmethod
-    def get_name(cls, key: int):
+    def get_name(cls, key: int) -> str:
         for member in cls:
             if member.value == key:
                 return member.name
+        raise ValueError(f"{cls.__name__}没有{key}属性")
+
+    @classmethod
+    def get_value(cls, key: str) -> int:
+        for member in cls:
+            if member.name == key:
+                return member.value
         raise ValueError(f"{cls.__name__}没有{key}属性")
 
     @classmethod
@@ -16,6 +23,13 @@ class IntBaseEnum(IntEnum):
         for member in cls:
             print(f"{member.value}.{member.name}")
         print("-" * 50)
+
+    @classmethod
+    def isExistProperty(cls, tag: str) -> bool:
+        for member in cls:
+            if member.name == tag:
+                return True
+        return False
 
 
 @unique
@@ -28,7 +42,9 @@ class DatasetsEnum(IntBaseEnum):
     Urban5 = auto()
     Urban6 = auto()
     # 模拟数据集
+    DeepGUn_ex1 = auto()
     DeepGUn_ex2 = auto()
+    DeepGUn_ex3 = auto()
     DeepGUn_ex4 = auto()
     SUnCNN_DC1 = auto()
     SUnCNN_DC2 = auto()

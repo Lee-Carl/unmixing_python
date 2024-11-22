@@ -1,5 +1,6 @@
 from typing import Dict
 from core import SmartMetrics, DataProcessor
+from core.init import Norm
 from utils import IsUtil, HsiUtil
 from custom_types import HsiDataset, HsiPropertyEnum
 
@@ -43,6 +44,7 @@ class Metrics:
                 Y_pred = dpred['Y']
             else:
                 Y_pred = dp.gen_Y(e=dpred["E"], a=dpred["A"])
+                Y_pred = Norm.max_norm(Y_pred)
 
             armse_y = sm.compute_RMSE_2(dtrue["Y"], Y_pred)
             asad_y = sm.compute_SAD(dtrue["Y"], Y_pred, HsiPropertyEnum.Y)[0]

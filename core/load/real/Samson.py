@@ -1,4 +1,4 @@
-from .Anchor import REAL_DATASET_DIR
+from core.consts import REAL_DATASET_DIR, SIMULATED_DATASET_DIR
 import numpy as np
 import scipy.io as scio
 
@@ -7,7 +7,7 @@ def loader():
     P, L, N = 3, 156, 9025
     H, W = 95, 95
 
-    data = scio.loadmat(f'{REAL_DATASET_DIR}/Samson/hu-ae-main/Samson.mat')
+    data = scio.loadmat(f'{REAL_DATASET_DIR}/Samson/Samson.mat')
     Y = data['Y'].astype(np.float32)
 
     Y = Y.reshape(L, H, W)

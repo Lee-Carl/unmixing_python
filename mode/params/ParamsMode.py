@@ -1,4 +1,4 @@
-from core import ModeAdapter, DataProcessor,MyLog
+from core import ModeAdapter, DataProcessor, MyLog
 from .draw import Draw
 from .metrics import Metrics
 import os
@@ -6,7 +6,7 @@ import scipy.io as sio
 from datetime import datetime
 import time
 from tqdm import tqdm
-from utils import HsiUtil
+from utils import HsiUtil, TimeUtil
 from custom_types import MainCfg
 
 dp = DataProcessor()
@@ -20,11 +20,6 @@ class ParamsMode:
         self.log = MyLog(cfg)
 
     @staticmethod
-    def __get_current_date_and_time():
-        start_time = datetime.now()
-        return start_time.strftime("%Y-%m-%d %H:%M:%S")
-
-    @staticmethod
     def __get_runtime(st, ed):
         execution_time = ed - st
         hours, remainder = divmod(execution_time, 3600)
@@ -33,7 +28,7 @@ class ParamsMode:
 
     def run(self):
         st = time.time()
-        start_time = self.__get_current_date_and_time()
+        start_time = TimeUtil.getCurrentTime()
         self.cp.set_seed()
         dataset = self.cp.get_Dataset()
         initData = self.cp.get_InitData(dataset)
@@ -94,7 +89,7 @@ class ParamsMode:
             "iter": iter
         })
         ed = time.time()
-        end_time = self.__get_current_date_and_time()
+        end_time = TimeUtil.getCurrentTime()
         total_time = self.__get_runtime(st, ed)
         print('*' * 60 + '  Execution Time!  ' + '*' * 60)
         print(f'起始时间: {start_time}')

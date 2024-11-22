@@ -12,15 +12,13 @@ class HsiUtil:
     def checkHsiDatasetDims(data: HsiDataset):
         """ 将数据转换到指定维度 """
         shape: tuple
-        if hasattr(data, 'Y'):
-            shape = HsiUtil.getShapeForData(HsiPropertyEnum.Y, data)
-            data.Y = HsiUtil.changeDims(data.Y, shape)
-        if hasattr(data, 'A'):
-            shape = HsiUtil.getShapeForData(HsiPropertyEnum.A, data)
-            data.A = HsiUtil.changeDims(data.A, shape)
-        if hasattr(data, 'E'):
-            shape = HsiUtil.getShapeForData(HsiPropertyEnum.E, data)
-            data.E = HsiUtil.changeDims(data.E, shape)
+        tags: list = ['Y', 'A', 'E']
+        for tag in tags:
+            if hasattr(data, tag) and HsiPropertyEnum.isExistProperty(tag):
+                v = HsiPropertyEnum.get_value(tag)
+                hpe = HsiPropertyEnum(v)
+                shape = HsiUtil.getShapeForData(hpe, data)
+                data[tag] = HsiUtil.changeDims(data[tag], shape)
         return data
 
     @staticmethod

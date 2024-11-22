@@ -89,10 +89,14 @@ class ModeAdapter:
     def run(method, params: dict, init: HsiDataset, savepath=None, output_display=True) -> HsiDataset:
         model = method(params=params, init=copy.deepcopy(init))
         data_pred: dict = model.run(savepath=savepath, output_display=output_display)
-        dic: dict = init.__dict__.copy() # tod
+        dic: dict = init.__dict__.copy()  # tod
         dic.update(data_pred)
         data = HsiDataset(**dic)
-        return HsiUtil.checkHsiDatasetDims(data)
+        data = HsiUtil.checkHsiDatasetDims(data)
+        data.E = dp.norm(data.E)
+        data.Y = dp.norm(data.Y)
+        data.A = dp.norm(data.A)
+        return data
 
     def get_Params_adjust(self):
         around = self.cfg.params.around

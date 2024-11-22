@@ -1,4 +1,4 @@
-from .Anchor import SIMULATED_DATASET_DIR
+from core.consts import REAL_DATASET_DIR, SIMULATED_DATASET_DIR
 import numpy as np
 import scipy.io as scio
 

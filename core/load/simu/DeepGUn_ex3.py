@@ -1,4 +1,4 @@
-from .Anchor import SIMULATED_DATASET_DIR
+from core.consts import REAL_DATASET_DIR, SIMULATED_DATASET_DIR
 import numpy as np
 import scipy.io as scio
 
@@ -17,13 +17,14 @@ def loader():
     return {
         "Y": Y,
         "E": M,
-        "E_3d": Mvs,
         "A": A,
         "P": P,
         "L": L,
         "N": N,
         "name": "DeepGUn_ex3",
         "H": H,
-        "W": W
+        "W": W,
+        "other": {
+            "E_3d": Mvs,
+        }
     }
-
