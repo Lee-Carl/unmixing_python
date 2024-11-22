@@ -30,7 +30,7 @@ if __name__ == '__main__':
             {"RMSE2", "A", SmartMetrics.compute_RMSE_2},
         ],
         "draw": [
-
+            draw.abundanceMap()
         ]
     }
 

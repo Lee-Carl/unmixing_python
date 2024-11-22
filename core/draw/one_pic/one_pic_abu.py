@@ -5,10 +5,10 @@ from core import Analyzer
 from matplotlib.font_manager import FontProperties
 from matplotlib.colors import Normalize
 from typing import List
-from custom_types import DatasetsEnum, HsiDataset
+from custom_types import DatasetsEnum, HsiDataset, ExInfo
 
 
-def one_pic_abu(ds: DatasetsEnum, items: List[Analyzer], nameList: List[str], show: bool = False, todiff: bool = False,
+def one_pic_abu(ds: DatasetsEnum, items: List[ExInfo], nameList: List[str], show: bool = False, todiff: bool = False,
                 t: bool = False, withGT: bool = False):
     plt.rcParams['xtick.direction'] = 'in'
     plt.rcParams['ytick.direction'] = 'in'
@@ -24,12 +24,13 @@ def one_pic_abu(ds: DatasetsEnum, items: List[Analyzer], nameList: List[str], sh
     plt.subplots_adjust(wspace=0.05, hspace=0.05)
 
     for i, item in enumerate(items):
-        a_3d = item.get_differenceMap(True) if todiff else item.get_abundanceMap(True)
+        result = Analyzer(dataset=item.dataset, method=item.method, path=item.dst)
+        a_3d = result.get_differenceMap(True) if todiff else item.get_abundanceMap(True)
 
         for j in range(0, P):
             # 方法名称
             if j == 0:
-                axs[j, i].title.set_text(item.method.name)  # 给左上角的子图添加标题
+                axs[j, i].title.set_text(result.method.name)  # 给左上角的子图添加标题
                 axs[j, i].title.set_fontproperties(font_prop)
             # 端元名称
             if i == 0:

@@ -1,15 +1,23 @@
-- [中文](readme.md)
-- [English](readme.en.md)
-
 # Unmixing_Python
 
+![](https://img.shields.io/badge/language-python-brightgreen)
+![Python Version](https://img.shields.io/badge/Python-%E2%89%A5%203.7-blue.svg)
+![](https://github.com/pytorch/pytorch)
+![](https://img.shields.io/badge/PyTorch-%E2%89%A5%201.0.0-red.svg)
+![NumPy](https://img.shields.io/badge/NumPy-%E2%89%A5%201.21.5-orange.svg)
+
+[中文](readme.md) | [English](readme.en.md)
+
 ## 1.Introduction
-This is a program for deep learning based hyperspectral unmixing, mainly to do blind unmixing. The main purpose here is to document the experiments and information that have been done, as well as to provide a program code solution for running the experiments.
+This is a deep learning based program for hyperspectral unmixing, mainly to do blind unmixing. There are two main things I want to do here:
+- Record the experiments and information that have been done, and provide a program code solution to run the experiments
+- Share some very valuable libraries
 <br>
 
 ## 2.Usage
 - Install the python library via requirements.txt, or install it yourself (recommended version is at least py37+pytorch 1.0.0);
 - Write configuration information in main.py, then click Run to start.
+- [document](_docs/unmixing_python_api.pyi)
 
 ## 3.Nice github repositories
 - Hyperspectral-Imaging ([comprehensive knowledge repository](https://github.com/xianchaoxiu/Hyperspectral-Imaging))

@@ -81,9 +81,8 @@ class AutoMode:
                 self.results.append([item.method.value])
                 for c in self.ex["metrics"]:
                     self.results.append(c[0])
-                    # todo: 待完善
                     az = Analyzer(dataset=item.dataset, method=item.method, path=item.dst)
-                    data: Any = az.call_any_function(c[2], az.getKey(c[1]))
+                    data: Any = az.call_any_function(c[2], az.getKey(c[1]))  # todo: 待完善
                     data = self.checkNan(data)
                     self.results[i].append(data)
         ''' 打印结果 '''
@@ -105,17 +104,14 @@ class AutoMode:
                 worksheet1.set_column('D:D', 70)
         print('*' * 100)
 
-    def draw(self):
-        # 录入excel做准备
+    def draw(self) -> None:
         for items in self.infos:
             for item in items:
-                # todo: 待完善
                 az = Analyzer(dataset=item.dataset, method=item.method, path=item.dst)
-                data: Any = az.call_any_function(az.getDataset, az.getDataset())
-                data = self.checkNan(data)
-                self.results.append([])
+                az.call_any_function(az.getDataset, az.getDataset())
 
-    def draw_onePic(self):
-        # 录入excel做准备
+    def draw_onePic(self) -> None:
+        """ 将一个数据集下的所有方法的结果图画在一张图上 """
         for items in self.infos:
-            one_pic.one_pic_edm(ds=self.ex['dataset'], items=items, nameList=self.ex["edm"])
+            dsName: str = items[0].dataset.name
+            one_pic.one_pic_edm(ds=self.ex['datasets'], items=items, nameList=self.ex["edm_name"][dsName])

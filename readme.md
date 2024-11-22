@@ -1,7 +1,12 @@
-- [中文](readme.md)
-- [English](readme.en.md)
-
 # 解混_Python
+
+![](https://img.shields.io/badge/language-python-brightgreen)
+![Python Version](https://img.shields.io/badge/Python-%E2%89%A5%203.7-blue.svg)
+![](https://github.com/pytorch/pytorch)
+![](https://img.shields.io/badge/PyTorch-%E2%89%A5%201.0.0-red.svg)
+![NumPy](https://img.shields.io/badge/NumPy-%E2%89%A5%201.21.5-orange.svg)
+
+[中文](readme.md) | [English](readme.en.md)
 
 ## 1.简介
 这是一个基于深度学习的高光谱解混的程序，主要是做盲解混。这里主要是想做两件事情：
@@ -11,6 +16,7 @@
 ## 2.使用
 - 通过requirements.txt安装py库，或者自行安装（建议版本至少为py37+pytorch 1.0.0）；
 - 在`main.py`中写配置信息，然后点击运行即可
+- [说明文档](_docs/unmixing_python_api.pyi)
 
 ## 3.值得学习的github库
 - Hyperspectral-Imaging ([很全面的库](https://github.com/xianchaoxiu/Hyperspectral-Imaging))

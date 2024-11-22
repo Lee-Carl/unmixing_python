@@ -4,12 +4,12 @@ import numpy as np
 from matplotlib.font_manager import FontProperties
 from matplotlib.colors import Normalize
 from core.init import Norm
-from custom_types import DatasetsEnum, HsiDataset
+from custom_types import DatasetsEnum, HsiDataset, ExInfo
 from core import Analyzer
 from typing import List
 
 
-def one_pic_edm(ds: DatasetsEnum, items: List[Analyzer], nameList: List[str], show: bool = False):
+def one_pic_edm(ds: DatasetsEnum, items: List[ExInfo], nameList: List[str], show: bool = False):
     plt.rcParams['xtick.direction'] = 'in'
     plt.rcParams['ytick.direction'] = 'in'
     plt.rcParams['font.family'] = 'Times New Roman'  # 字体
@@ -24,13 +24,14 @@ def one_pic_edm(ds: DatasetsEnum, items: List[Analyzer], nameList: List[str], sh
 
     for i, item in enumerate(items):
         # 真实端元图
-        edm: np.ndarray = item.get_endmembers()
+        result = Analyzer(dataset=item.dataset, method=item.method, path=item.dst)
+        edm: np.ndarray = result.get_endmembers()
         if len(edm.shape) == 3:
             edm = edm[:, :, 0]
         for j in range(0, P):
             if j == 0:
                 # 第一行上面的方法名称
-                axs[j, i].title.set_text(item.method.name)  # 给左上角的子图添加标题
+                axs[j, i].title.set_text(result.method.name)  # 给左上角的子图添加标题
                 axs[j, i].title.set_fontproperties(font_prop)
             if i == 0:
                 # 在轴外部添加文本
