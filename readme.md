@@ -30,10 +30,21 @@
 - 以`numpy`数据为主要的数据类型。只有在训练模型时，才会将`numpy`数据转换成`pytorch`数据
 
 它目前主要的不足是：
-- 缺少与光谱库相关的代码，因此若需要实现稀疏解混，需要自行补充代码；
-- 无法处理多个数据源；
+- 在这些情况下，需要自行补充代码：
+  - 缺少与光谱库相关的代码；
+  - 处理多个数据源
+  - ...
 - 没有设计好随机种子的配置，配置字段上只有一个`seed`字段；
 - 调参方式比较单一，每次只可以调一个参数。
+
+### 2.3 数据集
+
+以下是可提供的数据集, 放在了百度网盘(提取码: dcn5)：
+```
+https://pan.baidu.com/s/113ZNvTTxBLb6tZLqAc9Crw?pwd=dcn5
+```
+
+此外，可以自行添加数据集。
 
 ## 3.值得学习的github库
 - Hyperspectral-Imaging ([很全面的库](https://github.com/xianchaoxiu/Hyperspectral-Imaging))
