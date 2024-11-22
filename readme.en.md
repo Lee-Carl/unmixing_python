@@ -1,10 +1,9 @@
 # Unmixing_Python
 
 ![](https://img.shields.io/badge/language-python-brightgreen)
-![Python Version](https://img.shields.io/badge/Python-%E2%89%A5%203.7-blue.svg)
-![](https://github.com/pytorch/pytorch)
-![](https://img.shields.io/badge/PyTorch-%E2%89%A5%201.0.0-red.svg)
-![NumPy](https://img.shields.io/badge/NumPy-%E2%89%A5%201.21.5-orange.svg)
+![Python Version](https://img.shields.io/badge/Python-%E2%89%A5%203.7-blue.svg?logo=python)
+![](https://img.shields.io/badge/PyTorch-%E2%89%A5%201.0.0-red.svg?logo=pytorch)
+![NumPy](https://img.shields.io/badge/NumPy-%E2%89%A5%201.21.5-orange.svg?logo=numpy)
 
 [中文](readme.md) | [English](readme.en.md)
 
