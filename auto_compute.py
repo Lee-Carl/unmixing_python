@@ -7,7 +7,7 @@ from core import SmartMetrics
 if __name__ == '__main__':
     ex1 = {
         "datasets": ["JasperRidge"],
-        "methods": ["ELMM", "GLMM", "PLMM", "MESMA", "DeepGUn", "PGMSU", "DGASU"],
+        "methods": ["ELMM", "GLMM", "PLMM", "MESMA", "DeepGUn", "PGMSU"],
         "edm_name": {
             "JasperRidge": ["Tree", "Water", "Soil", "Road"],
             "DeepGUn_ex2": ["EM #1", "EM #2", "EM #3"]
@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
     ex2 = {
         "datasets": ["DeepGUn_ex4", "Samson"],
-        "methods": ["FCLSU", "ALMM", "CNNAEU", "DAEU", "EndNet", "CyCU", "DCAE"],
+        "methods": ["FCLSU", "ALMM", "CNNAEU", "DAEU", "EndNet", "CyCU"],
         "edm_name": {
             "Samson": ["Soil", "Tree", "Water"],
             "DeepGUn_ex4": ["EM #1", "EM #2", "EM #3", "EM #4", "EM #5"]
@@ -30,7 +30,7 @@ if __name__ == '__main__':
             {"RMSE2", "A", SmartMetrics.compute_RMSE_2},
         ],
         "draw": [
-            draw.abundanceMap()
+            draw.abundanceMap
         ]
     }
 
