@@ -1,5 +1,6 @@
 .idea
 data/initData
 data/dataset
+data/config
 res
 **/__pycache__/

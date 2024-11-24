@@ -8,10 +8,11 @@
 [中文](readme.md) | [English](readme.en.md)
 
 ## 1.Introduction
-This is a library related to hyperspectral image unmixing techniques. This library serves two purposes:
-- Provide a code program for conducting unmixing experiments
+When I was doing research, I had a huge headache of having to constantly add or tweak code when switching between different methods, datasets, and loss functions. After being exposed to a large amount of code, I learned some ideas about how to write unmixing code and came up with an idea, which is: to write a code framework where every additional dataset, metrics, etc. can be used in all the unmixing experiments that need to be conducted; and every additional unmixing method can encapsulate the dataset, metrics, etc. Doing this allows me to think minimally about how to tweak the code, but maximally about how to tweak the model or unmixing method. In addition, here are some github libraries that I have found particularly useful.
+
+**Briefly**, this is a library related to demixing techniques for hyperspectral images. This library serves two purposes:
+- Provide a code solution for conducting unmixing experiments
 - To share some very valuable libraries
-<br>
 
 ## 2. Code
 

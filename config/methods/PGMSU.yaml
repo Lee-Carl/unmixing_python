@@ -2,64 +2,64 @@ src: methods.PGMSU.PGMSU
 params:
   default:
     lr: !!float 1e-3
-    epochs: 2 #200
+    epochs: 200
     z_dim: 4
     seed: 0
     lambda_kl: 0.001
     lambda_sad: 4
     lambda_vol: 6
 
-#  JasperRidge:
-#    lr: !!float 1e-3
-#    epochs: 200
-#    z_dim: 4
-#    seed: 0
-#    lambda_kl: 0.05  # 0.1
-#    lambda_sad: 3
-#    lambda_vol: 7
-#
-#  DeepGUn_ex2:
-#    lr: !!float 1e-3
-#    epochs: 200
-#    z_dim: 4
-#    seed: 0
-#    lambda_kl: 1  # 0.1
-#    lambda_sad: 1  # 0
-#    lambda_vol: 0.5
-#
-#  DeepGUn_ex4:
-#    lr: !!float 1e-3
-#    epochs: 200
-#    z_dim: 4
-#    seed: 0
-#    lambda_kl: 0.5  # 6e-7  # 8.0
-#    lambda_sad: 0.1  # 0.02  # 4.51e-5
-#    lambda_vol: 1  # 0.5  # 8.15
-#
-#  Urban4:
-#    lr: !!float 1e-3
-#    epochs: 200
-#    z_dim: 4
-#    seed: 0
-#    lambda_kl: 0.001
-#    lambda_sad: 4
-#    lambda_vol: 6
-#
-#  Urban5:
-#    lr: !!float 1e-3
-#    epochs: 200
-#    z_dim: 4
-#    seed: 0
-#    lambda_kl: 0.001
-#    lambda_sad: 4
-#    lambda_vol: 6
-#
-#  Urban6:
-#    lr: !!float 1e-3
-#    epochs: 200
-#    z_dim: 4
-#    seed: 0
-#    lambda_kl: 0.001
-#    lambda_sad: 4
-#    lambda_vol: 6
+  JasperRidge:
+    lr: !!float 1e-3
+    epochs: 200
+    z_dim: 4
+    seed: 0
+    lambda_kl: 0.05
+    lambda_sad: 3
+    lambda_vol: 7
+
+  DeepGUn_ex2:
+    lr: !!float 1e-3
+    epochs: 200
+    z_dim: 4
+    seed: 0
+    lambda_kl: 1  # 0.1
+    lambda_sad: 1  # 0
+    lambda_vol: 0.5
+
+  DeepGUn_ex4:
+    lr: !!float 1e-3
+    epochs: 200
+    z_dim: 4
+    seed: 0
+    lambda_kl: 0.5  # 6e-7  # 8.0
+    lambda_sad: 0.1  # 0.02  # 4.51e-5
+    lambda_vol: 1  # 0.5  # 8.15
+
+  Urban4:
+    lr: !!float 1e-3
+    epochs: 200
+    z_dim: 4
+    seed: 0
+    lambda_kl: 0.001
+    lambda_sad: 4
+    lambda_vol: 6
+
+  Urban5:
+    lr: !!float 1e-3
+    epochs: 200
+    z_dim: 4
+    seed: 0
+    lambda_kl: 0.001
+    lambda_sad: 4
+    lambda_vol: 6
+
+  Urban6:
+    lr: !!float 1e-3
+    epochs: 200
+    z_dim: 4
+    seed: 0
+    lambda_kl: 0.001
+    lambda_sad: 4
+    lambda_vol: 6
     

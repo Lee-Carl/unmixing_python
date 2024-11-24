@@ -46,7 +46,6 @@ class RunMode:
         self.cp.set_seed()
         data_pred = self.cp.run(model, params, initData, savepath=outdir, output_display=True)
         data_pred = self.cp.sort_EndmembersAndAbundances(dataset, data_pred)
-        # sort_EndmembersAndAbundances(dtrue=dataset, dpred=datapred, edm_repeat=True, case=2)
         sio.savemat(outdir + "results.mat", data_pred.__dict__)
         ed = time.time()
         end_time = TimeUtil.getCurrentTime()

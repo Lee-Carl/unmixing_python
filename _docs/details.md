@@ -97,3 +97,9 @@ unmxingInfo = {
 1. 在methods目录下写解混方法。解混方法都需要继承`MethodBase`类，并实现run方法；
 2. 在config/methods目录写一个yaml文件，名称参考`name.yaml`；
 3. 在custom_types/enums.py文件中找到MethodsEnum，添加这个解混方法，内容参考`name = auto()`。至此，添加完成。
+
+## 3.2 添加参数
+
+参数文件写在config/methods目录下。需要写一个以解混方法名称命名的yaml文件。这个文件需要写两个字段：
+- src - 解混方法的路径
+- params - 必须填写一个`default`字段，意味着它可以跑任何数据集，或者认为这是鲁棒性最好的一组参数。如果需要针对不同的数据集使用不同的参数，那么在`src`字段下写对应的数据集名称，然后是它的一组参数

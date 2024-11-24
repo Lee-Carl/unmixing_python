@@ -50,7 +50,7 @@ class ModeAdapter:
             raise ValueError('Cannot find the init data!')
 
         # 优先级第二：指定的方法
-        elif custom_init_method:
+        elif False and custom_init_method:
             custom_init_methods_class = ml.get_Init_Function(custom_init_method)
             obj = custom_init_methods_class(dataset)
             init = obj()
