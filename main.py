@@ -12,7 +12,7 @@ unmxingInfo = {
     # 方法
     "method": MethodsEnum.PGMSU,
     # 模式
-    "mode": ModeEnum.Run,
+    "mode": ModeEnum.Param,
     # 随机种子
     "seed": 0,
     # 初始化方式

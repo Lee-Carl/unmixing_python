@@ -78,7 +78,6 @@ class MyLog:
             cfg_dict.pop('params', None)
         else:
             cfg_params = cfg_dict['params']
-            cfg_params['around'] = cfg_params[cfg_params['around']]
         cfg_dict['relative_path'] = out_path
         cfg_dict['dataset'] = self.cfg.dataset.name
         cfg_dict['method'] = self.cfg.method.name

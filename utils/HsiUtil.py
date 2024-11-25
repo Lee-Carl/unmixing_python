@@ -44,7 +44,7 @@ class HsiUtil:
         return data
 
     @staticmethod
-    def synthesizeMixedPixels(e: HsiData, a: HsiData) -> HsiData:
+    def gen_Y(e: HsiData, a: HsiData) -> HsiData:
         """ 通过端元和丰度合成混元数据 """
         # 作用：用端元矩阵与丰度矩阵生成像元矩阵Y
         # 丰度一般是二维的
